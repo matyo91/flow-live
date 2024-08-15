@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc321474ba48cdf726eedb4a1bd1b970",
+    "content-hash": "e1d88490bccc35c6261e572541c9836f",
     "packages": [
         {
             "name": "composer/semver",
@@ -86,6 +86,80 @@
                 }
             ],
             "time": "2024-07-12T11:35:52+00:00"
+        },
+        {
+            "name": "darkwood/flow",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darkwood-com/flow.git",
+                "reference": "2ea00d2a76d327208b3fb6ed1861f736ac2658b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darkwood-com/flow/zipball/2ea00d2a76d327208b3fb6ed1861f736ac2658b6",
+                "reference": "2ea00d2a76d327208b3fb6ed1861f736ac2658b6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3",
+                "symfony/event-dispatcher": "^7.0"
+            },
+            "require-dev": {
+                "amphp/amp": "^3.0",
+                "openswoole/ide-helper": "^22.1.5",
+                "react/async": "^4.2",
+                "spatie/async": "^1.6",
+                "symfony/doctrine-messenger": "^7.0",
+                "symfony/messenger": "^7.0",
+                "symfony/orm-pack": "^2.4"
+            },
+            "suggest": {
+                "amphp/amp": "Provide asynchronous with AMP",
+                "ext-openswoole": "Provide asynchronous with OpenSwoole",
+                "react/async": "Provide asynchronous with ReactPHP",
+                "spatie/async": "Provide asynchronous with Spatie",
+                "symfony/messenger": "Provide Symfony Messenger support"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flow\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathieu Ledru",
+                    "email": "mathieu@darkwood.fr"
+                }
+            ],
+            "description": "Flow",
+            "keywords": [
+                "amphp",
+                "async",
+                "fiber",
+                "monad",
+                "php",
+                "reactphp",
+                "spatie",
+                "swoole",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/darkwood-com/flow/issues",
+                "source": "https://github.com/darkwood-com/flow/tree/v1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/matyo91",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-14T21:01:32+00:00"
         },
         {
             "name": "doctrine/cache",
