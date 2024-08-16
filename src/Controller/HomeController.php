@@ -102,8 +102,8 @@ class HomeController extends AbstractController
             printf(".* %s\n", $exception->getMessage());
         };
 
-        $jobDataToYFlow = static function (DataD $dataD): YFlowData {
-            return new YFlowData($dataD->id, $dataD->id, $dataD->id);
+        $jobDataToYFlow = static function ($data): YFlowData {
+            return new YFlowData($data->id, $data->id, $data->id);
         };
 
         function factorial(int $n): int

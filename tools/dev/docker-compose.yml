@@ -1,16 +1,17 @@
-version: '3'
 services:
     php:
-        image: flow-php
+        image: music-flow-php
         build:
             context: .
             target: php
         volumes:
-            - ../..:/flow
+            - ../..:/music-flow
+        ports:
+            - 8096:8000
     mysql:
         image: mysql:8.1
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=flow
-            - MYSQL_USER=flow
-            - MYSQL_PASSWORD=flow
+            - MYSQL_DATABASE=music-flow
+            - MYSQL_USER=music-flow
+            - MYSQL_PASSWORD=fmusic-low
