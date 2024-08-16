@@ -3,5 +3,8 @@ parameters:
 	bootstrapFiles:
 		- vendor/autoload.php
 	paths:
+		- ../../bin
+		- ../../config
+		- ../../public
 		- ../../src
 		- ../../tests

@@ -26,8 +26,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-use function sprintf;
-
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
@@ -56,7 +54,7 @@ class HomeController extends AbstractController
 
             // simulating 1 chance on 5 to produce an exception from the "light" operation
             if (1 === random_int(1, 5)) {
-                throw new Error(sprintf('#%d - Failure when processing Job1', $dataA->id));
+                // throw new Error(sprintf('#%d - Failure when processing Job1', $dataA->id));
             }
 
             printf("*. #%d - Job 1 Result for %d + %d = %d and took %.01f seconds\n", $dataA->id, $dataA->a, $dataA->b, $d, $delay);
@@ -74,7 +72,7 @@ class HomeController extends AbstractController
 
             // simulating 1 chance on 5 to produce an exception from the "heavy" operation
             if (1 === random_int(1, 5)) {
-                throw new Error(sprintf('#%d - Failure when processing Job2', $dataB->id));
+                // throw new Error(sprintf('#%d - Failure when processing Job2', $dataB->id));
             }
 
             printf(".* #%d - Job 2 Result for %d * %d = %d and took %.01f seconds\n", $dataB->id, $dataB->d, $dataB->e, $f, $delay);
