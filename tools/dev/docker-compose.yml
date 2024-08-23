@@ -4,12 +4,14 @@ services:
         build:
             context: .
             target: php
+        container_name: music-flow-php
         volumes:
             - ../..:/music-flow
         ports:
             - 8096:8000
     mysql:
         image: mysql:8.1
+        container_name: music-flow-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=root
             - MYSQL_DATABASE=music-flow
