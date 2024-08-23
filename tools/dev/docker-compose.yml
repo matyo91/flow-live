@@ -1,19 +1,19 @@
 services:
     php:
-        image: music-flow-php
+        image: live-flow-php
         build:
             context: .
             target: php
-        container_name: music-flow-php
+        container_name: live-flow-php
         volumes:
-            - ../..:/music-flow
+            - ../..:/live-flow
         ports:
             - 8096:8000
     mysql:
         image: mysql:8.1
-        container_name: music-flow-mysql
+        container_name: live-flow-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=music-flow
-            - MYSQL_USER=music-flow
-            - MYSQL_PASSWORD=fmusic-low
+            - MYSQL_DATABASE=live-flow
+            - MYSQL_USER=live-flow
+            - MYSQL_PASSWORD=flive-low
