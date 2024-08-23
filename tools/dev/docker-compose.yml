@@ -1,19 +1,19 @@
 services:
     php:
-        image: live-flow-php
+        image: flow-live-php
         build:
             context: .
             target: php
-        container_name: live-flow-php
+        container_name: flow-live-php
         volumes:
-            - ../..:/live-flow
+            - ../..:/flow-live
         ports:
             - 8096:8000
     mysql:
         image: mysql:8.1
-        container_name: live-flow-mysql
+        container_name: flow-live-mysql
         environment:
             - MYSQL_ROOT_PASSWORD=root
-            - MYSQL_DATABASE=live-flow
-            - MYSQL_USER=live-flow
+            - MYSQL_DATABASE=flow-live
+            - MYSQL_USER=flow-live
             - MYSQL_PASSWORD=flive-low

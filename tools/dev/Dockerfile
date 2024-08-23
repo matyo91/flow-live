@@ -24,6 +24,6 @@ RUN apk add --no-cache bash
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash
 RUN apk add symfony-cli
 
-WORKDIR /live-flow
+WORKDIR /flow-live
 
 CMD ["php-fpm"]
