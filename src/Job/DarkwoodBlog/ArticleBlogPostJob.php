@@ -7,7 +7,7 @@ namespace App\Job\FlowExamples;
 use App\Model\YFlowData;
 use Flow\JobInterface;
 
-class DataToYFlowJob implements JobInterface
+class ArticleBlogPostJob implements JobInterface
 {
     public function __invoke($data): YFlowData
     {

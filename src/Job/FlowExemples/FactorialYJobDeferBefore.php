@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\Examples;
+namespace App\Job\FlowExamples;
 
 use App\Model\YFlowData;
 use Flow\JobInterface;
