@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job;
+namespace App\Job\Examples;
 
 use Flow\ExceptionInterface;
 use Flow\JobInterface;
