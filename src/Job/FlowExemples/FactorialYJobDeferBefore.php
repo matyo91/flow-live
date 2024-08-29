@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Job\FlowExamples;
 
-use App\Model\YFlowData;
+use App\Model\FlowExemples\YFlowData;
 use Flow\JobInterface;
 
 class FactorialYJobDeferBefore implements JobInterface

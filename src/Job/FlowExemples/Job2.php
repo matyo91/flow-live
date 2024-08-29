@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Job\FlowExamples;
 
-use App\Model\DataB;
-use App\Model\DataC;
+use App\Model\FlowExemples\DataB;
+use App\Model\FlowExemples\DataC;
 use Error;
 use Flow\DriverInterface;
 use Flow\JobInterface;

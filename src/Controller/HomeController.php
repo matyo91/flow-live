@@ -18,7 +18,7 @@ use App\Job\FlowExamples\FactorialYMemoJob;
 use App\Job\FlowExamples\Job1;
 use App\Job\FlowExamples\Job2;
 use App\Job\FlowExamples\Job3;
-use App\Model\DataA;
+use App\Model\FlowExemples\DataA;
 use Flow\AsyncHandler\DeferAsyncHandler;
 use Flow\Driver\AmpDriver;
 use Flow\Driver\FiberDriver;
@@ -39,7 +39,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        $driver = match (random_int(1, 4)) {
+        $driver = match (random_int(1, 1)) {
             1 => new AmpDriver(),
             2 => new FiberDriver(),
             3 => new ReactDriver(),
@@ -71,7 +71,7 @@ class HomeController extends AbstractController
                 yield [new FactorialYJobDeferAfter(), null, null, null, new DeferAsyncHandler()];
             }, ['driver' => $driver]);
 
-            for ($id = 1; $id <= 5; $id++) {
+            for ($id = 1; $id <= 1; $id++) {
                 $ip = new Ip(new DataA($id, random_int(1, 10), random_int(1, 10), random_int(1, 5)));
                 $flow($ip);
             }

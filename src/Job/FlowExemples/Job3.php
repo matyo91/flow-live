@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Job\FlowExamples;
 
-use App\Model\DataC;
-use App\Model\DataD;
+use App\Model\FlowExemples\DataC;
+use App\Model\FlowExemples\DataD;
 use Flow\JobInterface;
 
 class Job3 implements JobInterface
