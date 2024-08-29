@@ -10,10 +10,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ArticleBlogPostJob implements JobInterface
 {
-    public function __construct(private HttpClientInterface $httpClient)
-    {
-        
-    }
+    public function __construct(private HttpClientInterface $httpClient) {}
 
     public function __invoke($data): YFlowData
     {

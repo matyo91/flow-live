@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Job\FlowExamples;
 
-use App\Model\FlowExemples\DataA;
 use App\Model\FlowExemples\DataB;
 use Error;
 use Flow\DriverInterface;

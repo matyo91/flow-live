@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Job\FlowExamples;
 
-use Flow\ExceptionInterface;
 use Flow\JobInterface;
 
 class ErrorJob2 implements JobInterface
