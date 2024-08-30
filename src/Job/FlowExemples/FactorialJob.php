@@ -28,6 +28,6 @@ class FactorialJob implements JobInterface
 
     private function factorial(int $n): int
     {
-        return ($n <= 1) ? 1 : $n * factorial($n - 1);
+        return ($n <= 1) ? 1 : $n * $this->factorial($n - 1);
     }
 }

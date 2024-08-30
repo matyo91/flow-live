@@ -44,7 +44,7 @@ class FactorialYMemoJob implements JobInterface
 
     private function Ymemo(callable $f): Closure
     {
-        return Ywrap($f, 'memoWrapperGenerator');
+        return $this->Ywrap($f, fn($f) => $this->memoWrapperGenerator($f));
     }
 
     private function factorialGen(callable $func): Closure
@@ -56,6 +56,6 @@ class FactorialYMemoJob implements JobInterface
 
     private function factorialYMemo(int $n): int
     {
-        return $this->Ymemo('factorialGen')($n);
+        return $this->Ymemo(fn($recurse) => $this->factorialGen($recurse))($n);
     }
 }

@@ -46,7 +46,7 @@ class FlowExemplesCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $driver = match (random_int(1, 1)) {
+        $driver = match (random_int(1, 4)) {
             1 => new AmpDriver(),
             2 => new FiberDriver(),
             3 => new ReactDriver(),
@@ -78,7 +78,7 @@ class FlowExemplesCommand extends Command
                 yield [new FactorialYJobDeferAfter(), null, null, null, new DeferAsyncHandler()];
             }, ['driver' => $driver]);
 
-            for ($id = 1; $id <= 1; $id++) {
+            for ($id = 1; $id <= 5; $id++) {
                 $ip = new Ip(new DataA($id, random_int(1, 10), random_int(1, 10), random_int(1, 5)));
                 $flow($ip);
             }
