@@ -7,6 +7,9 @@ namespace App\Job\FlowExamples;
 use App\Model\FlowExemples\YFlowData;
 use Flow\JobInterface;
 
+/**
+ * @implements JobInterface<mixed, mixed>
+ */
 class DataToYFlowJob implements JobInterface
 {
     public function __invoke($data): YFlowData

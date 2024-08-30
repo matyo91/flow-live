@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d71d1b2bcde7f2d0027147b870289a1",
+    "content-hash": "20143109f1d634b4247b707af24ba97a",
     "packages": [
         {
             "name": "amphp/amp",
@@ -170,29 +170,29 @@
         },
         {
             "name": "darkwood/flow",
-            "version": "v1.2.0",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darkwood-com/flow.git",
-                "reference": "2ea00d2a76d327208b3fb6ed1861f736ac2658b6"
+                "reference": "af333ff8011c3d0fdac6282d9d3c62c9b8daa52d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darkwood-com/flow/zipball/2ea00d2a76d327208b3fb6ed1861f736ac2658b6",
-                "reference": "2ea00d2a76d327208b3fb6ed1861f736ac2658b6",
+                "url": "https://api.github.com/repos/darkwood-com/flow/zipball/af333ff8011c3d0fdac6282d9d3c62c9b8daa52d",
+                "reference": "af333ff8011c3d0fdac6282d9d3c62c9b8daa52d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
-                "symfony/event-dispatcher": "^7.0"
+                "symfony/event-dispatcher": "^7.0",
+                "symfony/messenger": "^7.0"
             },
             "require-dev": {
                 "amphp/amp": "^3.0",
                 "openswoole/ide-helper": "^22.1.5",
-                "react/async": "^4.2",
+                "react/async": "^4.3",
                 "spatie/async": "^1.6",
                 "symfony/doctrine-messenger": "^7.0",
-                "symfony/messenger": "^7.0",
                 "symfony/orm-pack": "^2.4"
             },
             "suggest": {
@@ -232,7 +232,7 @@
             ],
             "support": {
                 "issues": "https://github.com/darkwood-com/flow/issues",
-                "source": "https://github.com/darkwood-com/flow/tree/v1.2.0"
+                "source": "https://github.com/darkwood-com/flow/tree/v1.2.2"
             },
             "funding": [
                 {
@@ -240,7 +240,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-14T21:01:32+00:00"
+            "time": "2024-08-30T17:02:58+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -10815,5 +10815,5 @@
         "php": ">=8.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

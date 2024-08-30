@@ -13,6 +13,14 @@ The recommended way to install it through [Composer](http://getcomposer.org) and
 composer require darkwood/flow
 ```
 
+## Usage
+
+### Run Flow exemples
+
+```
+bin/console app:flow-exemples
+```
+
 ## License
 
 Live Flow is released under the MIT License.
