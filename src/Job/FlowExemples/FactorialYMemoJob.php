@@ -8,6 +8,9 @@ use App\Model\FlowExemples\YFlowData;
 use Closure;
 use Flow\JobInterface;
 
+/**
+ * @implements JobInterface<mixed, mixed>
+ */
 class FactorialYMemoJob implements JobInterface
 {
     public function __invoke($data): mixed
@@ -44,7 +47,7 @@ class FactorialYMemoJob implements JobInterface
 
     private function Ymemo(callable $f): Closure
     {
-        return $this->Ywrap($f, fn($f) => $this->memoWrapperGenerator($f));
+        return $this->Ywrap($f, fn ($f) => $this->memoWrapperGenerator($f));
     }
 
     private function factorialGen(callable $func): Closure
@@ -56,6 +59,6 @@ class FactorialYMemoJob implements JobInterface
 
     private function factorialYMemo(int $n): int
     {
-        return $this->Ymemo(fn($recurse) => $this->factorialGen($recurse))($n);
+        return $this->Ymemo(fn ($recurse) => $this->factorialGen($recurse))($n);
     }
 }

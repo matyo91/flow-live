@@ -9,8 +9,14 @@ use Error;
 use Flow\DriverInterface;
 use Flow\JobInterface;
 
+/**
+ * @implements JobInterface<mixed, mixed>
+ */
 class Job2 implements JobInterface
 {
+    /**
+     * @param DriverInterface<mixed, mixed> $driver
+     */
     public function __construct(private DriverInterface $driver) {}
 
     public function __invoke($dataB): mixed

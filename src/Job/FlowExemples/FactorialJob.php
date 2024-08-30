@@ -8,6 +8,9 @@ use App\Model\FlowExemples\YFlowData;
 use Flow\JobInterface;
 use InvalidArgumentException;
 
+/**
+ * @implements JobInterface<mixed, mixed>
+ */
 class FactorialJob implements JobInterface
 {
     public function __invoke($data): mixed

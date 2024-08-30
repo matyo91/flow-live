@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Flow\\": "../../src"
+            "App\\": "../../src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Flow\\Test\\": "../../tests"
+            "App\\Test\\": "../../tests"
         }
     }
 }
