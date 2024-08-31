@@ -21,6 +21,12 @@ composer require darkwood/flow
 bin/console app:flow-exemples
 ```
 
+### Run CarbonImage
+
+```
+bin/console app:carbon-image
+```
+
 ## License
 
 Live Flow is released under the MIT License.
