@@ -10,14 +10,14 @@
         }
     ],
     "minimum-stability": "stable",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "require": {
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-openswoole": "*",
         "amphp/amp": "^3.0",
-        "darkwood/flow": "^1.2",
+        "darkwood/flow": "dev-1.x-dev",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
