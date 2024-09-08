@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\FlowExamples;
+namespace App\Job\FlowExamples\Scrap;
 
 use App\Model\UrlContent;
 use CurlMultiHandle;
