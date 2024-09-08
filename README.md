@@ -23,11 +23,15 @@ bin/console app:flow-exemples
 
 ### Run CarbonImage
 
+For more details on the CarbonImage functionality, please visit: [https://blog.darkwood.com/article/automatiser-la-creation-de-screenshots-de-code-avec-carbon-now](https://blog.darkwood.com/article/automatiser-la-creation-de-screenshots-de-code-avec-carbon-now)
+
 ```
 bin/console app:carbon-image
 ```
 
 ### Scrap pages
+
+For more details on the CarbonImage functionality, please visit: [https://blog.darkwood.com/article/scrape-les-sites-de-maniere-efficace](https://blog.darkwood.com/article/scrape-les-sites-de-maniere-efficace)
 
 ```
 bin/console app:scrap
