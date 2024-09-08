@@ -3,7 +3,7 @@
         "php": ">=8.3",
         "symfony/event-dispatcher": "^7.0",
 		"amphp/amp": "^3.0",
-        "darkwood/flow": "^1.2",
+        "darkwood/flow": "dev-1.x-dev",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
