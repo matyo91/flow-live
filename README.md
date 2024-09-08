@@ -27,6 +27,12 @@ bin/console app:flow-exemples
 bin/console app:carbon-image
 ```
 
+### Scrap pages
+
+```
+bin/console app:scrap
+```
+
 ## License
 
 Live Flow is released under the MIT License.
