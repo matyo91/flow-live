@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Job\FlowExamples\ScrapUrlJob;
-use App\Job\FlowExamples\ScrapUrlsJob;
+use App\Job\FlowExamples\Scrap\ScrapUrlJob;
+use App\Job\FlowExamples\Scrap\ScrapUrlsJob;
 use App\Model\UrlContent;
 use Fiber;
 use Flow\AsyncHandler\DeferAsyncHandler;
