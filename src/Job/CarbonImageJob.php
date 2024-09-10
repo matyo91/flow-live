@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\FlowExamples;
+namespace App\Job;
 
 use App\Model\CarbonImage;
 use Exception;

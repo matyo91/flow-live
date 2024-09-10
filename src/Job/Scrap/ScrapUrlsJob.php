@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\FlowExamples\Scrap;
+namespace App\Job\Scrap;
 
 use App\Model\UrlContent;
 use Fiber;
