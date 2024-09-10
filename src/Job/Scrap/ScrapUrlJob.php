@@ -46,10 +46,10 @@ class ScrapUrlJob implements JobInterface
             && !($info !== false && $info['handle'] === $ch && $info['result'] === CURLE_OK) // check $ch is done
         );
 
-        $content = curl_multi_getcontent($ch);
+        $urlContent->content = curl_multi_getcontent($ch);
         curl_multi_remove_handle($this->mh, $ch);
         curl_close($ch);
 
-        return new UrlContent($urlContent->url, $content);
+        return $urlContent;
     }
 }
