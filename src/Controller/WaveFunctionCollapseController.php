@@ -13,7 +13,7 @@ class WaveFunctionCollapseController extends AbstractController
     public function index(): Response
     {
         return $this->render('wave_function_collapse/index.html.twig', [
-            'seo' => new Seo('Wave Function Collapse'),
+            'seo' => new Seo('wave-function-collapse', 'Wave Function Collapse'),
         ]);
     }
 }
