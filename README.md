@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/matyo91/flow-live">
-    <img src="public/logo.png" width="auto" height="128px" alt="Flow">
+    <img src="assets/images/logo.png" width="auto" height="128px" alt="Flow">
   </a>
 </p>
 

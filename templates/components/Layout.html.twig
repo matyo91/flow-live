@@ -2,12 +2,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
         <title>{{ seo.title }}</title>
         <meta name="description" content="{{ seo.description }}" />
         {{ importmap('app') }}
     </head>
     <body class="theme-{{ theme.value }}">
-        <twig:Header />
+        <twig:Header seo="{{ seo }}" />
         {% block body %}{% endblock %}
         <twig:Footer />
     </body>

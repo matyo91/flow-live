@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('home/index.html.twig', [
-            'seo' => new Seo('Flow Live'),
+            'seo' => new Seo('home', 'Flow Live'),
         ]);
     }
 }
