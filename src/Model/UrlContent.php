@@ -6,5 +6,5 @@ namespace App\Model;
 
 class UrlContent
 {
-    public function __construct(public string $url, public ?string $content = null) {}
+    public function __construct(public string $url, public ?string $title = null, public ?string $content = null) {}
 }
