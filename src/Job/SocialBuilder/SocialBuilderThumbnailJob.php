@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\FlowExamples\SocialBuilder;
+namespace App\Job\SocialBuilder;
 
 use Exception;
 use Flow\JobInterface;
