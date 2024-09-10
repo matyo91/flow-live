@@ -19,7 +19,10 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 use function count;
 use function sprintf;
@@ -31,11 +34,18 @@ use function sprintf;
 class ScrapCommand extends Command
 {
     private HttpClientInterface $httpClient;
+    private string $cacheDir;
+    private SluggerInterface $slugger;
 
-    public function __construct(HttpClientInterface $httpClient)
-    {
+    public function __construct(
+        HttpClientInterface $httpClient,
+        ParameterBagInterface $parameterBag,
+        SluggerInterface $slugger
+    ) {
         parent::__construct();
         $this->httpClient = $httpClient;
+        $this->cacheDir = $parameterBag->get('kernel.cache_dir');
+        $this->slugger = $slugger;
     }
 
     /**
@@ -82,7 +92,19 @@ class ScrapCommand extends Command
                 return $urlDatas;
             };
             yield [new ScrapUrlJob(), null, new FlattenIpStrategy()];
-            yield static function (UrlContent $urlData) use ($io) {
+            yield function (UrlContent $urlData) use ($io) {
+                $filesystem = new Filesystem();
+                $scrapDir = $this->cacheDir . '/scrap';
+
+                $filesystem->mkdir($scrapDir);
+
+                $slug = $this->slugger->slug($urlData->title)->lower();
+
+                $filename = $scrapDir . '/' . $slug . '.html';
+
+                $filesystem->dumpFile($filename, $urlData->content);
+
+                $io->writeln(sprintf('Content saved to: %s', $filename));
                 $io->writeln(sprintf('ScrapUrlJob    : Finished scrapping %s', $urlData->url));
             };
 
@@ -141,6 +163,58 @@ class ScrapCommand extends Command
                 $io->writeln(sprintf('ScrapYDeferJob : Finished scrapping %d', count($users)));
             };
         }, ['driver' => $driver]);
+
+        $urls = [
+            ['https://github.com/Jmgr/actiona','Actiona Cross platform automation tool'],
+            ['https://github.com/tryanything-ai/anything','Anything Local Zapier replacement written in Rust'],
+            ['https://airflow.apache.org','Apache Airflow'],
+            ['http://apify.com','Apify'],
+            ['https://itnext.io/smart-developers-dont-code-2bf882568c37','Apache Camel'],
+            ['https://play.google.com/store/apps/details?id=com.llamalab.automate','Automate'],
+            ['https://www.automa.site','Automa Automate your browser by connecting blocks'],
+            ['https://www.blitznocode.com','Blitznocode'],
+            ['https://fr.bonitasoft.com','Bonitasoft'],
+            ['https://camunda.com','Camunda'],
+            ['https://github.com/bolinfest/chickenfoot','Chickenfoot'],
+            ['https://github.com/DataFire/DataFire','Datafire'],
+            ['https://github.com/antonmi/flowex','Flowex'],
+            ['http://www.flogo.io','Flogo'],
+            ['https://www.flyde.dev','Flyde Visual Programming on VS Code'],
+            ['https://developers.google.com/blockly','Google Blockly'],
+            ['https://gluedata.io','Gluedata'],
+            ['https://github.com/huginn/huginn','Huginn'],
+            ['https://ifttt.com','IFTTT'],
+            ['https://www.integromat.com','Integromat'],
+            ['https://github.com/integrate-io','Integrate-io'],
+            ['https://github.com/kestra-io/kestra','Kestra'],
+            ['https://www.levity.ai','Levity'],
+            ['https://github.com/n8n-io/n8n','n8n.io'],
+            ['https://noflojs.org','NoFlo'],
+            ['https://nodered.org','Nodered'],
+            ['https://parabola.io','Parabola'],
+            ['https://www.prefect.io','Prefect'],
+            ['https://pipedream.com','Pipedream'],
+            ['https://www.refinery.io','Refinery.io'],
+            ['https://scratch.mit.edu','Scratch'],
+            ['https://apps.apple.com/us/app/scriptable/id1405459188','Scriptable.app'],
+            ['https://apps.apple.com/us/app/shortcuts/id915249334','Shortcut for iOS'],
+            ['https://github.com/pfgithub/scpl','Shocut like for Mac OS'],
+            ['https://github.com/steventroughtonsmith/shortcuts-iosmac','Shortcut like'],
+            ['https://skyvia.com','Skyvia'],
+            ['https://github.com/temporalio/samples-php','Temporal'],
+            ['https://titanoboa.io','Titanoboa'],
+            ['https://tray.io','Tray.io'],
+            ['https://ui.vision/x/desktop-automation','UIVision'],
+            ['https://www.workato.com','Workato'],
+            ['https://zapier.com','Zapier'],
+        ];
+
+        $datas = array_map(function($data) {
+            [$url, $title] = $data;
+            return new UrlContent($url, $title);
+        }, $urls);
+
+        $flow(new Ip($datas));
 
         $flow(new Ip([
             new UrlContent('https://www.google.fr'),
