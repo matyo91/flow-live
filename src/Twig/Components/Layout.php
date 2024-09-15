@@ -20,6 +20,11 @@ final class Layout
     #[LiveProp]
     public ThemeEnum $theme = ThemeEnum::LIGHT;
 
+    public function mount(Seo $seo)
+    {
+        $this->seo = $seo;
+    }
+
     #[LiveListener('themeChanged')]
     public function changeTheme()
     {

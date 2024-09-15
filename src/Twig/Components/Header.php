@@ -22,9 +22,9 @@ final class Header
     #[LiveProp]
     public ThemeEnum $theme = ThemeEnum::LIGHT;
 
-    #[LiveAction]
-    public function themeChanged()
+    public function mount(Seo $seo, ThemeEnum $theme)
     {
-        $this->emit('themeChanged');
+        $this->seo = $seo;
+        $this->theme = $theme;
     }
 }

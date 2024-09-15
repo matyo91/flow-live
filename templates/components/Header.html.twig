@@ -38,10 +38,11 @@
             </a>
         </li>
         <li class="nav-item">
-            <a
+            <button
                 class="nav-link"
-                href="#"
                 aria-label="Theme"
+                data-action="live#emit"
+                data-live-event-param="themeChanged"
             >
                 {% if theme.value == 'light' %}
                 <twig:ux:icon name="bi:brightness-high" class="svg-inline--fa fa-w-16"
@@ -49,8 +50,6 @@
                     stroke-width="0.2px"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    data-action="live#emit"
-                    data-live-event-param="themeChanged"
                 />
                 {% elseif theme.value == 'dark' %}
                 <twig:ux:icon name="bi:moon" class="svg-inline--fa fa-w-16"
@@ -58,8 +57,6 @@
                     stroke-width="0.2px"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    data-action="live#emit"
-                    data-live-event-param="themeChanged"
                 />
                 {% elseif theme.value == 'sepia' %}
                 <twig:ux:icon name="simple-line-icons:cup" class="svg-inline--fa fa-w-16"
@@ -67,11 +64,9 @@
                     stroke-width="0.2px"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    data-action="live#emit"
-                    data-live-event-param="themeChanged"
                 />
                 {% endif %}
-            </a>
+            </button>
         </li>
     </ul>
 </header>
