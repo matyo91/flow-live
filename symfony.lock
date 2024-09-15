@@ -257,6 +257,9 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/ux-icons": {
+        "version": "v2.19.0"
+    },
     "symfony/ux-live-component": {
         "version": "2.19",
         "recipe": {
