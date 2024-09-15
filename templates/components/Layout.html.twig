@@ -9,7 +9,7 @@
         {{ importmap('app') }}
     </head>
     <body class="theme-{{ theme.value }}">
-        <twig:Header seo="{{ seo }}" />
+        <twig:Header seo="{{ seo }}" theme="{{ theme }}" />
         {% block body %}{% endblock %}
         <twig:Footer />
     </body>
