@@ -1,14 +1,14 @@
-body {
+.theme {
   color: var(--text-color);
   background-color: var(--bg-color);
 }
 
-hr {
+.theme hr {
   background-color: var(--border-color);
   opacity: 1;
 }
 
-a {
+.theme a {
   color: var(--primary-color);
 
   &:hover {
@@ -16,7 +16,7 @@ a {
   }
 }
 
-input {
+.theme input {
   background-color: var(--input-color);
   border-color: var(--border-color);
 

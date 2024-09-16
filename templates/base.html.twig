@@ -1,2 +1,15 @@
 <!DOCTYPE html>
-<twig:Layout seo="{{ seo }}" />
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+        <title>{{ seo.title }}</title>
+        <meta name="description" content="{{ seo.description }}" />
+        <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+        {{ importmap('app') }}
+    </head>
+    <body id="{{ seo.page }}">
+        <twig:Content seo="{{ seo }}" />
+    </body>
+</html>
