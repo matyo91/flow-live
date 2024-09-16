@@ -45,6 +45,12 @@ Flow as a container for PHP-ETL, for more details, please visit: [https://php-et
 bin/console app:php-etl
 ```
 
+### Wave Function Collapse
+
+Inspired by
+- https://github.com/CodingTrain/Wave-Function-Collapse
+- https://github.com/FeatheredSnek/phpwfc
+
 ## License
 
 Live Flow is released under the MIT License.

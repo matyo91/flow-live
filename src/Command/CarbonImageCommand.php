@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Job\FlowExamples\CarbonImageJob;
+use App\Job\CarbonImageJob;
 use App\Model\CarbonImage;
 use Flow\Driver\AmpDriver;
 use Flow\Driver\FiberDriver;

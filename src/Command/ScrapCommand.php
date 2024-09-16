@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\IpStrategy\FlattenIpStrategy;
 use App\Job\Scrap\ScrapUrlJob;
 use App\Job\Scrap\ScrapUrlsJob;
 use App\Model\UrlContent;
@@ -12,17 +13,16 @@ use Flow\AsyncHandler\DeferAsyncHandler;
 use Flow\Driver\FiberDriver;
 use Flow\Flow\Flow;
 use Flow\Ip;
-use Flow\IpStrategy\FlattenIpStrategy;
 use Flow\Job\YJob;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 use function count;
 use function sprintf;
@@ -165,52 +165,53 @@ class ScrapCommand extends Command
         }, ['driver' => $driver]);
 
         $urls = [
-            ['https://github.com/Jmgr/actiona','Actiona Cross platform automation tool'],
-            ['https://github.com/tryanything-ai/anything','Anything Local Zapier replacement written in Rust'],
-            ['https://airflow.apache.org','Apache Airflow'],
-            ['http://apify.com','Apify'],
-            ['https://itnext.io/smart-developers-dont-code-2bf882568c37','Apache Camel'],
-            ['https://play.google.com/store/apps/details?id=com.llamalab.automate','Automate'],
-            ['https://www.automa.site','Automa Automate your browser by connecting blocks'],
-            ['https://www.blitznocode.com','Blitznocode'],
-            ['https://fr.bonitasoft.com','Bonitasoft'],
-            ['https://camunda.com','Camunda'],
-            ['https://github.com/bolinfest/chickenfoot','Chickenfoot'],
-            ['https://github.com/DataFire/DataFire','Datafire'],
-            ['https://github.com/antonmi/flowex','Flowex'],
-            ['http://www.flogo.io','Flogo'],
-            ['https://www.flyde.dev','Flyde Visual Programming on VS Code'],
-            ['https://developers.google.com/blockly','Google Blockly'],
-            ['https://gluedata.io','Gluedata'],
-            ['https://github.com/huginn/huginn','Huginn'],
-            ['https://ifttt.com','IFTTT'],
-            ['https://www.integromat.com','Integromat'],
-            ['https://github.com/integrate-io','Integrate-io'],
-            ['https://github.com/kestra-io/kestra','Kestra'],
-            ['https://www.levity.ai','Levity'],
-            ['https://github.com/n8n-io/n8n','n8n.io'],
-            ['https://noflojs.org','NoFlo'],
-            ['https://nodered.org','Nodered'],
-            ['https://parabola.io','Parabola'],
-            ['https://www.prefect.io','Prefect'],
-            ['https://pipedream.com','Pipedream'],
-            ['https://www.refinery.io','Refinery.io'],
-            ['https://scratch.mit.edu','Scratch'],
-            ['https://apps.apple.com/us/app/scriptable/id1405459188','Scriptable.app'],
-            ['https://apps.apple.com/us/app/shortcuts/id915249334','Shortcut for iOS'],
-            ['https://github.com/pfgithub/scpl','Shocut like for Mac OS'],
-            ['https://github.com/steventroughtonsmith/shortcuts-iosmac','Shortcut like'],
-            ['https://skyvia.com','Skyvia'],
-            ['https://github.com/temporalio/samples-php','Temporal'],
-            ['https://titanoboa.io','Titanoboa'],
-            ['https://tray.io','Tray.io'],
-            ['https://ui.vision/x/desktop-automation','UIVision'],
-            ['https://www.workato.com','Workato'],
-            ['https://zapier.com','Zapier'],
+            ['https://github.com/Jmgr/actiona', 'Actiona Cross platform automation tool'],
+            ['https://github.com/tryanything-ai/anything', 'Anything Local Zapier replacement written in Rust'],
+            ['https://airflow.apache.org', 'Apache Airflow'],
+            ['http://apify.com', 'Apify'],
+            ['https://itnext.io/smart-developers-dont-code-2bf882568c37', 'Apache Camel'],
+            ['https://play.google.com/store/apps/details?id=com.llamalab.automate', 'Automate'],
+            ['https://www.automa.site', 'Automa Automate your browser by connecting blocks'],
+            ['https://www.blitznocode.com', 'Blitznocode'],
+            ['https://fr.bonitasoft.com', 'Bonitasoft'],
+            ['https://camunda.com', 'Camunda'],
+            ['https://github.com/bolinfest/chickenfoot', 'Chickenfoot'],
+            ['https://github.com/DataFire/DataFire', 'Datafire'],
+            ['https://github.com/antonmi/flowex', 'Flowex'],
+            ['http://www.flogo.io', 'Flogo'],
+            ['https://www.flyde.dev', 'Flyde Visual Programming on VS Code'],
+            ['https://developers.google.com/blockly', 'Google Blockly'],
+            ['https://gluedata.io', 'Gluedata'],
+            ['https://github.com/huginn/huginn', 'Huginn'],
+            ['https://ifttt.com', 'IFTTT'],
+            ['https://www.integromat.com', 'Integromat'],
+            ['https://github.com/integrate-io', 'Integrate-io'],
+            ['https://github.com/kestra-io/kestra', 'Kestra'],
+            ['https://www.levity.ai', 'Levity'],
+            ['https://github.com/n8n-io/n8n', 'n8n.io'],
+            ['https://noflojs.org', 'NoFlo'],
+            ['https://nodered.org', 'Nodered'],
+            ['https://parabola.io', 'Parabola'],
+            ['https://www.prefect.io', 'Prefect'],
+            ['https://pipedream.com', 'Pipedream'],
+            ['https://www.refinery.io', 'Refinery.io'],
+            ['https://scratch.mit.edu', 'Scratch'],
+            ['https://apps.apple.com/us/app/scriptable/id1405459188', 'Scriptable.app'],
+            ['https://apps.apple.com/us/app/shortcuts/id915249334', 'Shortcut for iOS'],
+            ['https://github.com/pfgithub/scpl', 'Shocut like for Mac OS'],
+            ['https://github.com/steventroughtonsmith/shortcuts-iosmac', 'Shortcut like'],
+            ['https://skyvia.com', 'Skyvia'],
+            ['https://github.com/temporalio/samples-php', 'Temporal'],
+            ['https://titanoboa.io', 'Titanoboa'],
+            ['https://tray.io', 'Tray.io'],
+            ['https://ui.vision/x/desktop-automation', 'UIVision'],
+            ['https://www.workato.com', 'Workato'],
+            ['https://zapier.com', 'Zapier'],
         ];
 
-        $datas = array_map(function($data) {
+        $datas = array_map(static function ($data) {
             [$url, $title] = $data;
+
             return new UrlContent($url, $title);
         }, $urls);
 
