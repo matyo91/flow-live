@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig\Components;
 
 use App\Enum\ThemeEnum;
@@ -20,15 +22,15 @@ final class Content
     #[LiveProp]
     public ThemeEnum $theme = ThemeEnum::LIGHT;
 
-    public function mount(Seo $seo)
+    public function mount(Seo $seo): void
     {
         $this->seo = $seo;
     }
 
     #[LiveListener('themeChanged')]
-    public function changeTheme()
+    public function changeTheme(): void
     {
-        $this->theme = match($this->theme) {
+        $this->theme = match ($this->theme) {
             ThemeEnum::LIGHT => ThemeEnum::DARK,
             ThemeEnum::DARK => ThemeEnum::SEPIA,
             ThemeEnum::SEPIA => ThemeEnum::LIGHT,

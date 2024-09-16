@@ -37,6 +37,12 @@ For more details on the CarbonImage functionality, please visit: [https://blog.d
 bin/console app:scrap
 ```
 
+### Wave Function Collapse
+
+Inspired by
+- https://github.com/CodingTrain/Wave-Function-Collapse
+- https://github.com/FeatheredSnek/phpwfc
+
 ## License
 
 Live Flow is released under the MIT License.
