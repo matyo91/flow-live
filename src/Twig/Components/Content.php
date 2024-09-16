@@ -10,7 +10,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-final class Layout
+final class Content
 {
     use DefaultActionTrait;
 
@@ -28,6 +28,10 @@ final class Layout
     #[LiveListener('themeChanged')]
     public function changeTheme()
     {
-        $this->theme = ThemeEnum::DARK;
+        $this->theme = match($this->theme) {
+            ThemeEnum::LIGHT => ThemeEnum::DARK,
+            ThemeEnum::DARK => ThemeEnum::SEPIA,
+            ThemeEnum::SEPIA => ThemeEnum::LIGHT,
+        };
     }
 }

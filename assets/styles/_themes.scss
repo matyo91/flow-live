@@ -5,7 +5,7 @@ $app-themes: ();
 @import 'themes/sepia';
 
 @each $app-theme, $app-colors in $app-themes {
-  body.theme-#{$app-theme} {
+  .theme-#{$app-theme} {
     @each $name, $value in $app-colors {
       --#{$name}-color: #{$value};
     }

@@ -1,0 +1,7 @@
+<div{{ attributes }}>
+    <div class="vh-100 theme theme-{{ theme.value }}">
+        <twig:Header key="{{ theme.value }}" seo="{{ seo }}" theme="{{ theme }}" />
+        {% block body %}{% endblock %}
+        <twig:Footer />
+    </div>
+</div>

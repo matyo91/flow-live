@@ -1,80 +1,76 @@
-<header class="navbar navbar-top navbar-expand flex-row">
-    <a class="navbar-brand mr-0 mr-md-2" aria-label="Flow Live" href="{{ path('app_home') }}">
-        <img src="{{ asset('images/logo.png') }}" width="36" height="36" class="d-block" alt="Flow Live" />
-    </a>
+<div{{ attributes }}>
+    <header class="navbar navbar-top navbar-expand flex-row">
+        <a class="navbar-brand mr-0 mr-md-2" aria-label="Flow Live" href="{{ path('app_home') }}">
+            <img src="{{ asset('images/logo.png') }}" width="36" height="36" class="d-block" alt="Flow Live" />
+        </a>
 
-    <div class="navbar-nav-scroll d-none d-md-flex">
-        <ul class="navbar-nav bd-navbar-nav flex-row">
+        <div class="navbar-nav-scroll d-none d-md-flex">
+            <ul class="navbar-nav bd-navbar-nav flex-row">
+                <li class="nav-item">
+                    <a class="nav-link{{ seo.page == 'wave-function-collapse' ? ' active' : '' }}" href="{{ path('app_wave_function_collapse') }}">Wave Function Collapse</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="navbar-nav flex-row ms-auto">
             <li class="nav-item">
-                <a class="nav-link{{ seo.page == 'home' ? ' active' : '' }}" href="{{ path('app_home') }}">Home</a>
+                <a
+                    class="nav-link"
+                    href="https://github.com/darkwood-com/flow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                >
+                    <twig:ux:icon name="bi:github" class="svg-inline--fa" />
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link{{ seo.page == 'wave-function-collapse' ? ' active' : '' }}" href="{{ path('app_wave_function_collapse') }}">Wave Function Collapse</a>
+                <a
+                    class="nav-link"
+                    href="https://twitter.com/darkwood_com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Twitter"
+                >
+                    <twig:ux:icon name="bi:twitter" class="svg-inline--fa" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <button
+                    class="nav-link"
+                    aria-label="Theme"
+                    data-action="live#emit"
+                    data-live-event-param="themeChanged"
+                >
+                    {% if theme.value == 'light' %}
+                    <twig:ux:icon name="bi:brightness-high" class="svg-inline--fa fa-w-16"
+                        stroke="currentColor"
+                        stroke-width="0.2px"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    {% elseif theme.value == 'dark' %}
+                    <twig:ux:icon name="bi:moon" class="svg-inline--fa fa-w-16"
+                        stroke="currentColor"
+                        stroke-width="0.2px"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    {% elseif theme.value == 'sepia' %}
+                    <twig:ux:icon name="simple-line-icons:cup" class="svg-inline--fa fa-w-16"
+                        stroke="currentColor"
+                        stroke-width="0.2px"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                    {% endif %}
+                </button>
             </li>
         </ul>
-    </div>
-
-    <ul class="navbar-nav flex-row ms-auto">
+    </header>
+    <ul class="nav nav-bar-bottom fixed-bottom justify-content-center d-flex d-md-none">
         <li class="nav-item">
-            <a
-                class="nav-link"
-                href="https://github.com/darkwood-com/flow"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-            >
-                <twig:ux:icon name="bi:github" class="svg-inline--fa" />
-            </a>
-        </li>
-        <li class="nav-item">
-            <a
-                class="nav-link"
-                href="https://twitter.com/darkwood_com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-            >
-                <twig:ux:icon name="bi:twitter" class="svg-inline--fa" />
-            </a>
-        </li>
-        <li class="nav-item">
-            <button
-                class="nav-link"
-                aria-label="Theme"
-                data-action="live#emit"
-                data-live-event-param="themeChanged"
-            >
-                {% if theme.value == 'light' %}
-                <twig:ux:icon name="bi:brightness-high" class="svg-inline--fa fa-w-16"
-                    stroke="currentColor"
-                    stroke-width="0.2px"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                {% elseif theme.value == 'dark' %}
-                <twig:ux:icon name="bi:moon" class="svg-inline--fa fa-w-16"
-                    stroke="currentColor"
-                    stroke-width="0.2px"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                {% elseif theme.value == 'sepia' %}
-                <twig:ux:icon name="simple-line-icons:cup" class="svg-inline--fa fa-w-16"
-                    stroke="currentColor"
-                    stroke-width="0.2px"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                />
-                {% endif %}
-            </button>
+            <a class="nav-link{{ seo.page == 'wave-function-collapse' ? ' active' : '' }}" href="{{ path('app_wave_function_collapse') }}">Wave Function Collapse</a>
         </li>
     </ul>
-</header>
-<ul class="nav nav-bar-bottom fixed-bottom justify-content-center d-flex d-md-none">
-    <li class="nav-item">
-        <a class="nav-link{{ seo.page == 'app_home' ? ' active' : '' }}" href="{{ path('app_home') }}">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link{{ seo.page == 'wave-function-collapse' ? ' active' : '' }}" href="{{ path('app_wave_function_collapse') }}">Wave Function Collapse</a>
-    </li>
-</ul>
+</div>
