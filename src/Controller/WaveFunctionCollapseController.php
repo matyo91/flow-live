@@ -14,7 +14,7 @@ class WaveFunctionCollapseController extends AbstractController
     #[Route('/wave-function-collapse', name: 'app_wave_function_collapse')]
     public function index(): Response
     {
-        return $this->render('wave_function_collapse/index.html.twig', [
+        return $this->render('base.html.twig', [
             'seo' => new Seo('wave-function-collapse', 'Wave Function Collapse'),
         ]);
     }
