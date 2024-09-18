@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Job\Scrap;
 
-use App\Model\UrlContent;
+use App\Model\Scrap\UrlContent;
 use Fiber;
 use Flow\JobInterface;
 
