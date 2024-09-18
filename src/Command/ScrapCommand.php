@@ -7,7 +7,7 @@ namespace App\Command;
 use App\IpStrategy\FlattenIpStrategy;
 use App\Job\Scrap\ScrapUrlJob;
 use App\Job\Scrap\ScrapUrlsJob;
-use App\Model\UrlContent;
+use App\Model\Scrap\UrlContent;
 use Fiber;
 use Flow\AsyncHandler\DeferAsyncHandler;
 use Flow\Driver\FiberDriver;
