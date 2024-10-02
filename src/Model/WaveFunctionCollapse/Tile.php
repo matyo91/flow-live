@@ -1,31 +1,29 @@
 <?php
 
-namespace Model\WaveFunctionCollapse;
+namespace App\Model\WaveFunctionCollapse;
 
 class Tile
 {
-    public $img;
+    public $index;
     public $edges;
     public $up = [];
     public $right = [];
     public $down = [];
     public $left = [];
-    public $index;
+    public $rotate = 0;
 
-    public function __construct($img, $edges, $i = null)
+    public function __construct($index, $edges, $rotate = 0)
     {
-        $this->img = $img;
+        $this->index = $index;
         $this->edges = $edges;
-        if ($i !== null) {
-            $this->index = $i;
-        }
+        $this->rotate = $rotate;
     }
 
     public function analyze($tiles)
     {
         foreach ($tiles as $i => $tile) {
-            // Tile 5 can't match itself
-            if ($tile->index == 5 && $this->index == 5) continue;
+            // Tile can't match itself
+            if ($tile->index == $this->index) continue;
 
             // UP
             if ($this->compareEdge($tile->edges[2], $this->edges[0])) {
@@ -46,16 +44,14 @@ class Tile
         }
     }
 
-    public function rotate($num)
+    public function rotate($rotate)
     {
-        $newImg = '';
-        
         $newEdges = [];
         $len = count($this->edges);
         for ($i = 0; $i < $len; $i++) {
-            $newEdges[$i] = $this->edges[($i - $num + $len) % $len];
+            $newEdges[$i] = $this->edges[($i - $rotate + $len) % $len];
         }
-        return new Tile($newImg, $newEdges, $this->index);
+        return new Tile($this->index, $newEdges, $rotate);
     }
 
     private function reverseString($s)

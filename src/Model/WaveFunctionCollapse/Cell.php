@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\WaveFunctionCollapse;
+namespace App\Model\WaveFunctionCollapse;
 
 class Cell
 {

@@ -1,2 +1,25 @@
-<div{{ attributes }}>
+<div{{ attributes }} class="wave-function-collapse_board">
+
+    <div class="container">
+        {% for j in 0..height-1 %}
+            <div class="row">
+                {% for i in 0..width-1 %}
+                    {% set cell = grid[i + j * height] %}
+                    <div class="col p-0">
+                        <div class="ratio ratio-1x1">
+                            {% if cell.isCollapsed %}
+                                {% set index = cell.options[0] %}
+                                <div class="bg-secondary d-flex align-items-center justify-content-center">
+                                    <img src="{{ asset('images/wave-function-collapse/circuit-coding-train/' ~ tiles[index].index ~ '.png') }}" alt="Tile {{ tiles[index].index }}" class="img-fluid rotate-{{ tiles[index].rotate }}">
+                                </div>
+                            {% else %}
+                                <div class="bg-secondary d-flex align-items-center justify-content-center"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
 </div>
