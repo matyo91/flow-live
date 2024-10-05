@@ -23,8 +23,9 @@ class CollapseJob implements JobInterface
     public function __invoke($grid): mixed
     {
         // Pick cell with least entropy
+        $gridNoOptions = array_filter($grid, fn(Cell $a) => empty($a->getOptions()));
         $gridCopy = array_filter($grid, fn(Cell $a) => !$a->isCollapsed());
-        if (empty($gridCopy)) {
+        if (!empty($gridNoOptions) || empty($gridCopy)) {
             return null;
         }
 
@@ -99,10 +100,6 @@ class CollapseJob implements JobInterface
                             $validOptions = array_merge($validOptions, $valid);
                         }
                         $this->checkValid($options, $validOptions);
-                    }
-
-                    if (empty($options)) {
-                        return null;
                     }
 
                     $nextGrid[$index] = new Cell($options);
