@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Job\WaveFunctionCollapse;
 
 use App\Model\WaveFunctionCollapse\Cell;
-use Exception;
+use App\Model\WaveFunctionCollapse\Tile;
 use Flow\JobInterface;
+
+use function count;
+use function in_array;
 
 /**
  * @implements JobInterface<mixed, mixed>
@@ -14,28 +17,29 @@ use Flow\JobInterface;
 class CollapseJob implements JobInterface
 {
     public function __construct(
+        /** @var Tile[] */
         public array $tiles,
         public int $width,
         public int $height,
-    )
-    {}
+    ) {}
 
     public function __invoke($grid): mixed
     {
         // Pick cell with least entropy
-        $gridNoOptions = array_filter($grid, fn(Cell $a) => empty($a->getOptions()));
-        $gridCopy = array_filter($grid, fn(Cell $a) => !$a->isCollapsed());
+        $gridNoOptions = array_filter($grid, static fn (Cell $a) => empty($a->getOptions()));
+        $gridCopy = array_filter($grid, static fn (Cell $a) => !$a->isCollapsed());
         if (!empty($gridNoOptions) || empty($gridCopy)) {
             return null;
         }
 
-        usort($gridCopy, fn($a, $b) => count($a->getOptions()) - count($b->getOptions()));
+        usort($gridCopy, static fn ($a, $b) => count($a->getOptions()) - count($b->getOptions()));
 
         $len = count($gridCopy[0]->getOptions());
         $stopIndex = 0;
         for ($i = 1; $i < count($gridCopy); $i++) {
             if (count($gridCopy[$i]->getOptions()) > $len) {
                 $stopIndex = $i;
+
                 break;
             }
         }
@@ -110,11 +114,15 @@ class CollapseJob implements JobInterface
         return $nextGrid;
     }
 
+    /**
+     * @param array<int> $arr   The array of options to check and potentially modify
+     * @param array<int> $valid The array of valid options to compare against
+     */
     private function checkValid(array &$arr, array $valid): void
     {
         for ($i = count($arr) - 1; $i >= 0; $i--) {
             $element = $arr[$i];
-            if (!in_array($element, $valid)) {
+            if (!in_array($element, $valid, true)) {
                 array_splice($arr, $i, 1);
             }
         }

@@ -1,33 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\WaveFunctionCollapse;
+
+use function count;
 
 class Tile
 {
-    public $index;
-    public $edges;
-    public $up = [];
-    public $right = [];
-    public $down = [];
-    public $left = [];
-    public $direction = 0;
+    public function __construct(
+        public int $index,
+        /** @var array<string> */
+        public array $edges,
+        public int $direction = 0,
+        /** @var array<int> */
+        public array $up = [],
+        /** @var array<int> */
+        public array $right = [],
+        /** @var array<int> */
+        public array $down = [],
+        /** @var array<int> */
+        public array $left = []
+    ) {}
 
-    public function __construct($index, $edges, $direction = 0, $up = [], $right = [], $down = [], $left = [])
-    {
-        $this->index = $index;
-        $this->edges = $edges;
-        $this->direction = $direction;
-        $this->up = $up;
-        $this->right = $right;
-        $this->down = $down;
-        $this->left = $left;
-    }
-
-    public function analyze($tiles)
+    /**
+     * @param Tile[] $tiles
+     */
+    public function analyze(array $tiles): void
     {
         foreach ($tiles as $i => $tile) {
             // Tile can't match itself
-            if ($tile->index == $this->index) continue;
+            if ($tile->index === $this->index) {
+                continue;
+            }
 
             // UP
             if ($this->compareEdge($tile->edges[2], $this->edges[0])) {
@@ -48,23 +53,24 @@ class Tile
         }
     }
 
-    public function rotate($direction)
+    public function rotate(int $direction): self
     {
         $newEdges = [];
         $len = count($this->edges);
         for ($i = 0; $i < $len; $i++) {
             $newEdges[$i] = $this->edges[($i - $direction + $len) % $len];
         }
-        return new Tile($this->index, $newEdges, $direction);
+
+        return new self($this->index, $newEdges, $direction);
     }
 
-    private function reverseString($s)
+    private function reverseString(string $s): string
     {
         return strrev($s);
     }
 
-    private function compareEdge($a, $b)
+    private function compareEdge(string $a, string $b): bool
     {
-        return $a == $this->reverseString($b);
+        return $a === $this->reverseString($b);
     }
 }
