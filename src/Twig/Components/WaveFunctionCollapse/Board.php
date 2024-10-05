@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig\Components\WaveFunctionCollapse;
 
 use App\Enum\WaveFunctionCollapse\DataSetEnum;
 use App\Job\WaveFunctionCollapse\CollapseJob;
 use App\Model\WaveFunctionCollapse\Cell;
 use App\Model\WaveFunctionCollapse\Tile;
-use Flow\Driver\FiberDriver;
 use Flow\Flow\Flow;
 use Flow\Ip;
-use Symfony\Component\VarDumper\Cloner\Data;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+
+use function count;
 
 #[AsLiveComponent]
 final class Board
@@ -23,11 +25,13 @@ final class Board
     #[LiveProp(writable: true, onUpdated: 'reset')]
     public DataSetEnum $dataSet = DataSetEnum::CIRCUIT_CODING_TRAIN;
 
+    /** @var array<Tile> */
     #[LiveProp(hydrateWith: 'hydrateTiles', dehydrateWith: 'dehydrateTiles', writable: true)]
     public array $tiles = [];
+    /** @var array<Cell> */
     #[LiveProp(hydrateWith: 'hydrateGrid', dehydrateWith: 'dehydrateGrid', writable: true)]
     public array $grid = [];
-    
+
     #[LiveProp]
     public int $width = 0;
     #[LiveProp]
@@ -44,7 +48,7 @@ final class Board
         $this->reset();
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->loadDataset();
 
@@ -69,15 +73,17 @@ final class Board
     }
 
     #[LiveAction]
-    public function collapse() {
+    public function collapse(): void
+    {
         $flow = Flow::do(function () {
             yield new CollapseJob($this->tiles, $this->width, $this->height);
-            yield function($nextGrid) {
-                if($nextGrid === null) {
+            yield function ($nextGrid) {
+                if ($nextGrid === null) {
                     $this->startOver();
                 } else {
                     $this->grid = $nextGrid;
                 }
+
                 return $this->grid;
             };
         });
@@ -92,27 +98,14 @@ final class Board
         $this->pool = !$this->pool;
     }
 
-    private function removeDuplicatedTiles(array $tiles): array
+    /**
+     * @param array<Tile> $tiles
+     *
+     * @return array<mixed>
+     */
+    public function dehydrateTiles(array $tiles): array
     {
-        $uniqueTilesMap = [];
-        foreach ($tiles as $tile) {
-            $key = implode(',', $tile->edges); // ex: "ABB,BCB,BBA,AAA"
-            $uniqueTilesMap[$key] = $tile;
-        }
-        return array_values($uniqueTilesMap);
-    }
-
-    private function startOver(): void
-    {
-        // Create cell for each spot on the grid
-        for ($i = 0; $i < $this->width * $this->height; $i++) {
-            $this->grid[$i] = new Cell(count($this->tiles));
-        }
-    }
-
-    public function dehydrateTiles(array $tiles)
-    {
-        return array_map(function (Tile $tile) {
+        return array_map(static function (Tile $tile) {
             return [
                 'index' => $tile->index,
                 'edges' => $tile->edges,
@@ -125,9 +118,14 @@ final class Board
         }, $tiles);
     }
 
+    /**
+     * @param array<mixed> $data
+     *
+     * @return array<Tile>
+     */
     public function hydrateTiles($data): array
     {
-        return array_map(function ($tileData) {
+        return array_map(static function ($tileData) {
             return new Tile(
                 $tileData['index'],
                 $tileData['edges'],
@@ -135,14 +133,19 @@ final class Board
                 $tileData['up'],
                 $tileData['right'],
                 $tileData['down'],
-                $tileData['left'] 
+                $tileData['left']
             );
         }, $data);
     }
 
+    /**
+     * @param array<Cell> $grid
+     *
+     * @return array<mixed>
+     */
     public function dehydrateGrid(array $grid): array
     {
-        return array_map(function (Cell $cell) {
+        return array_map(static function (Cell $cell) {
             return [
                 'options' => $cell->options,
                 'collapsed' => $cell->collapsed,
@@ -150,14 +153,44 @@ final class Board
         }, $grid);
     }
 
+    /**
+     * @param array<mixed> $data
+     *
+     * @return array<Cell>
+     */
     public function hydrateGrid(array $data): array
     {
         return array_map(function ($cellData) {
             $cell = new Cell(count($this->tiles));
             $cell->options = $cellData['options'];
             $cell->collapsed = $cellData['collapsed'];
+
             return $cell;
         }, $data);
+    }
+
+    /**
+     * @param array<Tile> $tiles
+     *
+     * @return array<Tile>
+     */
+    private function removeDuplicatedTiles(array $tiles): array
+    {
+        $uniqueTilesMap = [];
+        foreach ($tiles as $tile) {
+            $key = implode(',', $tile->edges); // ex: "ABB,BCB,BBA,AAA"
+            $uniqueTilesMap[$key] = $tile;
+        }
+
+        return array_values($uniqueTilesMap);
+    }
+
+    private function startOver(): void
+    {
+        // Create cell for each spot on the grid
+        for ($i = 0; $i < $this->width * $this->height; $i++) {
+            $this->grid[$i] = new Cell(count($this->tiles));
+        }
     }
 
     private function loadDataset(): void
@@ -311,7 +344,6 @@ final class Board
                 new Tile(68, ['TTO', 'OOO', 'TTO', 'TTT']),
                 new Tile(69, ['OTT', 'TTT', 'OTT', 'OOO']),
             ],
-            default => throw new \InvalidArgumentException('Invalid dataset'),
         };
     }
 }
