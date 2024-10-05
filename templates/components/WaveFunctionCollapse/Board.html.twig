@@ -1,15 +1,21 @@
-<div{{ attributes }} class="wave-function-collapse_board" data-poll="delay(2000)|collapse">
+<div{{ attributes }} class="wave-function-collapse_board"{% if pool %} data-poll="delay(2000)|collapse"{% endif %}>
 
     <div class="container">
         <div class="mb-3 d-flex align-items-center">
             <label for="dataSetSelect" class="form-label me-2 mb-0">Dataset</label>
-            <select class="form-select" id="dataSetSelect" data-model="dataSet">
+            <select class="form-select me-2" id="dataSetSelect" data-model="dataSet">
                 {% for dataSetItem in enum_cases('App\\Enum\\WaveFunctionCollapse\\DataSetEnum') %}
                     <option value="{{ dataSetItem.value }}" {% if dataSetItem.value == dataSet.value %}selected{% endif %}>
                         {{ dataSetItem.value|capitalize|replace({'-': ' '}) }}
                     </option>
                 {% endfor %}
             </select>
+            {% if not pool %}
+                <button class="btn btn-primary" data-action="live#action" data-live-action-param="collapse">Collapse</button>
+            {% endif %}
+            <button class="btn btn-secondary ms-2" data-action="live#action" data-live-action-param="togglePool">
+                {% if pool %}Stop Auto-Collapse{% else %}Start Auto-Collapse{% endif %}
+            </button>
         </div>
 
         {% for j in 0..height-1 %}

@@ -33,6 +33,9 @@ final class Board
     #[LiveProp]
     public int $height = 0;
 
+    #[LiveProp]
+    public bool $pool = false;
+
     public function mount(int $width, int $height): void
     {
         $this->width = $width;
@@ -45,11 +48,13 @@ final class Board
     {
         $this->loadDataset();
 
-        $initialTileCount = count($this->tiles);
+        $initialTiles = $this->tiles;
+        $initialTileCount = count($initialTiles);
+        $this->tiles = [];
         for ($i = 0; $i < $initialTileCount; $i++) {
             $tempTiles = [];
             for ($j = 0; $j < 4; $j++) {
-                $tempTiles[] = $this->tiles[$i]->rotate($j);
+                $tempTiles[] = $initialTiles[$i]->rotate($j);
             }
             $tempTiles = $this->removeDuplicatedTiles($tempTiles);
             $this->tiles = array_merge($this->tiles, $tempTiles);
@@ -79,6 +84,12 @@ final class Board
 
         $flow(new Ip($this->grid));
         $flow->await();
+    }
+
+    #[LiveAction]
+    public function togglePool(): void
+    {
+        $this->pool = !$this->pool;
     }
 
     private function removeDuplicatedTiles(array $tiles): array
