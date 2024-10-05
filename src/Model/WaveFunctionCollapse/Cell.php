@@ -4,8 +4,8 @@ namespace App\Model\WaveFunctionCollapse;
 
 class Cell
 {
-    private bool $collapsed = false;
-    private array $options;
+    public bool $collapsed = false;
+    public array $options;
 
     public function __construct($value)
     {

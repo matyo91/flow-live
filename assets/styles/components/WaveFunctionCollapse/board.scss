@@ -1,5 +1,9 @@
 .wave-function-collapse_board
 {
+  .container {
+    max-width: 800px;
+  }
+
   .rotate-1 {
     transform: rotate(90deg);
   }
