@@ -10,13 +10,17 @@ class Tile
     public $right = [];
     public $down = [];
     public $left = [];
-    public $rotate = 0;
+    public $direction = 0;
 
-    public function __construct($index, $edges, $rotate = 0)
+    public function __construct($index, $edges, $direction = 0, $up = [], $right = [], $down = [], $left = [])
     {
         $this->index = $index;
         $this->edges = $edges;
-        $this->rotate = $rotate;
+        $this->direction = $direction;
+        $this->up = $up;
+        $this->right = $right;
+        $this->down = $down;
+        $this->left = $left;
     }
 
     public function analyze($tiles)
@@ -44,14 +48,14 @@ class Tile
         }
     }
 
-    public function rotate($rotate)
+    public function rotate($direction)
     {
         $newEdges = [];
         $len = count($this->edges);
         for ($i = 0; $i < $len; $i++) {
-            $newEdges[$i] = $this->edges[($i - $rotate + $len) % $len];
+            $newEdges[$i] = $this->edges[($i - $direction + $len) % $len];
         }
-        return new Tile($this->index, $newEdges, $rotate);
+        return new Tile($this->index, $newEdges, $direction);
     }
 
     private function reverseString($s)
