@@ -4,7 +4,7 @@
         <div class="mb-3 d-flex align-items-center">
             <label for="dataSetSelect" class="form-label me-2 mb-0">Dataset</label>
             <select class="form-select me-2" id="dataSetSelect" data-model="dataSet">
-                {% for dataSetItem in enum_cases('App\\Enum\\WaveFunctionCollapse\\DataSetEnum') %}
+                {% for dataSetItem in enum_cases('App\\EnumType\\WaveFunctionCollapse\\DataSetEnumType') %}
                     <option value="{{ dataSetItem.value }}" {% if dataSetItem.value == dataSet.value %}selected{% endif %}>
                         {{ dataSetItem.value|capitalize|replace({'-': ' '}) }}
                     </option>

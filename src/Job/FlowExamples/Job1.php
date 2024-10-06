@@ -9,6 +9,8 @@ use Error;
 use Flow\DriverInterface;
 use Flow\JobInterface;
 
+use function sprintf;
+
 /**
  * @implements JobInterface<mixed, mixed>
  */
@@ -30,7 +32,7 @@ class Job1 implements JobInterface
 
         // simulating 1 chance on 5 to produce an exception from the "light" operation
         if (1 === random_int(1, 5)) {
-            // throw new Error(sprintf('#%d - Failure when processing Job1', $dataA->id));
+            throw new Error(sprintf('#%d - Failure when processing Job1', $dataA->id));
         }
 
         printf("*. #%d - Job 1 Result for %d + %d = %d and took %.01f seconds\n", $dataA->id, $dataA->a, $dataA->b, $d, $delay);

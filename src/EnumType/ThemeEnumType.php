@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Enum;
+namespace App\EnumType;
 
-enum ThemeEnum: string
+enum ThemeEnumType: string
 {
     case LIGHT = 'light';
     case DARK = 'dark';

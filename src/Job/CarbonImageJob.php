@@ -79,7 +79,6 @@ class CarbonImageJob implements JobInterface
     public function __invoke($carbonImage): mixed
     {
         $url = $this->getTransformedUrl($carbonImage->code, $this->config);
-        // $this->download($url, $carbonImage->path);
 
         return new CarbonImage($carbonImage->code, $carbonImage->path, $url);
     }

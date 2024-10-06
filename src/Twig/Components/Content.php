@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig\Components;
 
-use App\Enum\ThemeEnum;
+use App\EnumType\ThemeEnumType;
 use App\Model\Seo;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
@@ -20,7 +20,7 @@ final class Content
     public Seo $seo;
 
     #[LiveProp]
-    public ThemeEnum $theme = ThemeEnum::LIGHT;
+    public ThemeEnumType $theme = ThemeEnumType::LIGHT;
 
     public function mount(Seo $seo): void
     {
@@ -31,9 +31,9 @@ final class Content
     public function changeTheme(): void
     {
         $this->theme = match ($this->theme) {
-            ThemeEnum::LIGHT => ThemeEnum::DARK,
-            ThemeEnum::DARK => ThemeEnum::SEPIA,
-            ThemeEnum::SEPIA => ThemeEnum::LIGHT,
+            ThemeEnumType::LIGHT => ThemeEnumType::DARK,
+            ThemeEnumType::DARK => ThemeEnumType::SEPIA,
+            ThemeEnumType::SEPIA => ThemeEnumType::LIGHT,
         };
     }
 }

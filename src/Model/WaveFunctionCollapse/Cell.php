@@ -9,6 +9,7 @@ use function is_array;
 class Cell
 {
     public bool $collapsed = false;
+
     /**
      * @var array<int>
      */

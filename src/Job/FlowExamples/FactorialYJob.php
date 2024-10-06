@@ -14,7 +14,7 @@ class FactorialYJob implements JobInterface
 {
     public function __invoke($factorial): mixed
     {
-        return static function ($data) use ($factorial) {
+        return static function (YFlowData $data) use ($factorial) {
             return new YFlowData(
                 $data->id,
                 $data->number,

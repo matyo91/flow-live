@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Enum\WaveFunctionCollapse;
+namespace App\EnumType\WaveFunctionCollapse;
 
-enum DataSetEnum: string
+enum DataSetEnumType: string
 {
     case CIRCUIT = 'circuit';
     case CIRCUIT_CODING_TRAIN = 'circuit-coding-train';

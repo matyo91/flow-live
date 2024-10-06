@@ -36,7 +36,8 @@ class CollapseJob implements JobInterface
 
         $len = count($gridCopy[0]->getOptions());
         $stopIndex = 0;
-        for ($i = 1; $i < count($gridCopy); $i++) {
+        $gridCopyCount = count($gridCopy);
+        for ($i = 1; $i < $gridCopyCount; $i++) {
             if (count($gridCopy[$i]->getOptions()) > $len) {
                 $stopIndex = $i;
 
