@@ -18,7 +18,7 @@
         "ext-openswoole": "*",
         "amphp/amp": "^3.0",
         "darkwood/flow": "dev-1.x-dev",
-        "doctrine/dbal": "^3",
+        "doctrine/dbal": "^4",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",

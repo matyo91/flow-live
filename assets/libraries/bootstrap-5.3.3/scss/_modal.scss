@@ -22,7 +22,7 @@
   --#{$prefix}modal-inner-border-radius: #{$modal-content-inner-border-radius};
   --#{$prefix}modal-header-padding-x: #{$modal-header-padding-x};
   --#{$prefix}modal-header-padding-y: #{$modal-header-padding-y};
-  --#{$prefix}modal-header-padding: #{$modal-header-padding}; // Todo in v6: Split this padding into x and y
+  --#{$prefix}modal-header-padding: #{$modal-header-padding};
   --#{$prefix}modal-header-border-color: #{$modal-header-border-color};
   --#{$prefix}modal-header-border-width: #{$modal-header-border-width};
   --#{$prefix}modal-title-line-height: #{$modal-title-line-height};
@@ -168,7 +168,7 @@
   // This solution is far from ideal because of the universal selector usage,
   // but is needed to fix https://github.com/twbs/bootstrap/issues/24800
   > * {
-    margin: calc(var(--#{$prefix}modal-footer-gap) * .5); // Todo in v6: replace with gap on parent class
+    margin: calc(var(--#{$prefix}modal-footer-gap) * .5);
   }
 }
 

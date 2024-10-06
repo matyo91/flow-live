@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\WaveFunctionCollapse;
 
-use App\Enum\WaveFunctionCollapse\DataSetEnum;
+use App\EnumType\WaveFunctionCollapse\DataSetEnumType;
 use App\Job\WaveFunctionCollapse\CollapseJob;
 use App\Model\WaveFunctionCollapse\Cell;
 use App\Model\WaveFunctionCollapse\Tile;
@@ -23,7 +23,7 @@ final class Board
     use DefaultActionTrait;
 
     #[LiveProp(writable: true, onUpdated: 'reset')]
-    public DataSetEnum $dataSet = DataSetEnum::CIRCUIT_CODING_TRAIN;
+    public DataSetEnumType $dataSet = DataSetEnumType::CIRCUIT_CODING_TRAIN;
 
     /** @var array<Tile> */
     #[LiveProp(hydrateWith: 'hydrateTiles', dehydrateWith: 'dehydrateTiles', writable: true)]
@@ -38,7 +38,7 @@ final class Board
     public int $height = 0;
 
     #[LiveProp]
-    public bool $pool = false;
+    public bool $pool = true;
 
     public function mount(int $width, int $height): void
     {
@@ -196,7 +196,7 @@ final class Board
     private function loadDataset(): void
     {
         $this->tiles = match ($this->dataSet) {
-            DataSetEnum::CIRCUIT, DataSetEnum::CIRCUIT_CODING_TRAIN => [
+            DataSetEnumType::CIRCUIT, DataSetEnumType::CIRCUIT_CODING_TRAIN => [
                 new Tile(0, ['AAA', 'AAA', 'AAA', 'AAA']),
                 new Tile(1, ['BBB', 'BBB', 'BBB', 'BBB']),
                 new Tile(2, ['BBB', 'BCB', 'BBB', 'BBB']),
@@ -211,14 +211,14 @@ final class Board
                 new Tile(11, ['BCB', 'BCB', 'BBB', 'BBB']),
                 new Tile(12, ['BBB', 'BCB', 'BBB', 'BCB']),
             ],
-            DataSetEnum::DEMO, DataSetEnum::MOUNTAINS, DataSetEnum::PIPES, DataSetEnum::POLKA, DataSetEnum::ROADS, DataSetEnum::TRAIN_TRACKS => [
+            DataSetEnumType::DEMO, DataSetEnumType::MOUNTAINS, DataSetEnumType::PIPES, DataSetEnumType::POLKA, DataSetEnumType::ROADS, DataSetEnumType::TRAIN_TRACKS => [
                 new Tile(0, ['0', '0', '0', '0']),
                 new Tile(1, ['0', '1', '1', '1']),
                 new Tile(2, ['1', '0', '1', '1']),
                 new Tile(3, ['1', '1', '1', '0']),
                 new Tile(4, ['1', '1', '0', '1']),
             ],
-            DataSetEnum::FLOOR => [
+            DataSetEnumType::FLOOR => [
                 new Tile(0, ['YYY', 'YLY', 'YYY', 'YLY']),
                 new Tile(1, ['YYY', 'YLY', 'YLY', 'YLY']),
                 new Tile(2, ['YLY', 'YLY', 'YYY', 'YYY']),
@@ -237,7 +237,7 @@ final class Board
                 new Tile(15, ['YLY', 'YBW', 'WWW', 'YBW']),
                 new Tile(16, ['YYY', 'YBW', 'WWW', 'YBW']),
             ],
-            DataSetEnum::SPACE => [
+            DataSetEnumType::SPACE => [
                 // floor
                 new Tile(0, ['GGG', 'GGG', 'GGG', 'GGG']),
                 new Tile(1, ['GGG', 'GGG', 'GGG', 'GGG']),
