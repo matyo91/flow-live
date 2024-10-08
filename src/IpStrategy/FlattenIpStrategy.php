@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Flow\IpStrategy;
+namespace App\IpStrategy;
 
 use Flow\Event;
 use Flow\Event\PoolEvent;

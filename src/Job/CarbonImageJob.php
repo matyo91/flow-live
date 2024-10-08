@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Job\FlowExamples;
+namespace App\Job;
 
 use App\Model\CarbonImage;
 use Exception;
@@ -79,7 +79,6 @@ class CarbonImageJob implements JobInterface
     public function __invoke($carbonImage): mixed
     {
         $url = $this->getTransformedUrl($carbonImage->code, $this->config);
-        // $this->download($url, $carbonImage->path);
 
         return new CarbonImage($carbonImage->code, $carbonImage->path, $url);
     }

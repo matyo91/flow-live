@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/matyo91/flow-live">
-    <img src="public/logo.png" width="auto" height="128px" alt="Flow">
+    <img src="assets/images/logo.png" width="auto" height="128px" alt="Flow">
   </a>
 </p>
 
@@ -36,6 +36,12 @@ For more details on the CarbonImage functionality, please visit: [https://blog.d
 ```
 bin/console app:scrap
 ```
+
+### Wave Function Collapse
+
+Inspired by
+- https://github.com/CodingTrain/Wave-Function-Collapse
+- https://github.com/FeatheredSnek/phpwfc
 
 ## License
 
