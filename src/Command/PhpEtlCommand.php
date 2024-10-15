@@ -27,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
     name: 'app:php-etl',
-    description: 'Add a short description for your command',
+    description: 'Flow as a container for PHP-ETL',
 )]
 class PhpEtlCommand extends Command
 {
