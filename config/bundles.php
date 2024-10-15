@@ -11,8 +11,12 @@ use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
+use Symfony\UX\Icons\UXIconsBundle;
+use Symfony\UX\LiveComponent\LiveComponentBundle;
 use Symfony\UX\StimulusBundle\StimulusBundle;
 use Symfony\UX\Turbo\TurboBundle;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
+use Symfonycasts\SassBundle\SymfonycastsSassBundle;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 
 return [
@@ -28,4 +32,8 @@ return [
     SecurityBundle::class => ['all' => true],
     MonologBundle::class => ['all' => true],
     MakerBundle::class => ['dev' => true],
+    TwigComponentBundle::class => ['all' => true],
+    LiveComponentBundle::class => ['all' => true],
+    SymfonycastsSassBundle::class => ['all' => true],
+    UXIconsBundle::class => ['all' => true],
 ];
