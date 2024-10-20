@@ -51,6 +51,10 @@ Inspired by
 - https://github.com/CodingTrain/Wave-Function-Collapse
 - https://github.com/FeatheredSnek/phpwfc
 
+```
+bin/console app:wave-function-collapse
+```
+
 ## License
 
 Live Flow is released under the MIT License.

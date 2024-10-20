@@ -12,7 +12,7 @@ use function count;
 use function in_array;
 
 /**
- * @implements JobInterface<mixed, mixed>
+ * @implements JobInterface<Cell[], Cell[]|null>
  */
 class CollapseJob implements JobInterface
 {
@@ -51,10 +51,10 @@ class CollapseJob implements JobInterface
 
         $cell = $gridCopy[array_rand($gridCopy)];
         $cell->setCollapsed(true);
-        $pick = $cell->getOptions()[array_rand($cell->getOptions())];
-        if ($pick === null) {
+        if (empty($cell->getOptions())) {
             return null;
         }
+        $pick = $cell->getOptions()[array_rand($cell->getOptions())];
         $cell->setOptions([$pick]);
 
         $nextGrid = [];
