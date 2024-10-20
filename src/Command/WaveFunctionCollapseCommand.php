@@ -69,34 +69,36 @@ class WaveFunctionCollapseCommand extends Command
         $io->writeln(sprintf('Grid size: %dx%d', $width, $height));
         $io->writeln(sprintf('Dataset: %s', $dataSet->value));
 
-        $board = new Board($width, $height);
-        $board->reset($dataSet);
+        $flow = Flow::do(function () use ($io, $imagine, $dataSet) {
+            yield static function ($data) {
+                [$width, $height, $dataSet] = $data;
 
-        $flow = Flow::do(function () use ($io, $imagine, $board, $dataSet) {
-            yield new YFlow(function ($collapseLoop) use ($imagine, $board, $dataSet) {
-                return function ($data) use ($collapseLoop, $imagine, $board, $dataSet) {
-                    [$grid, $images] = $data;
+                $board = new Board($width, $height);
+                $board->reset($dataSet);
+
+                return [$board, []];
+            };
+            yield new YFlow(function ($collapseLoop) use ($imagine, $dataSet) {
+                return function ($data) use ($collapseLoop, $imagine, $dataSet) {
+                    [$board, $images] = $data;
 
                     $images[] = (new ImgJob(
                         $imagine,
                         $this->assetsDir,
-                        $board->tiles,
-                        $board->width,
-                        $board->height,
                         $dataSet,
                         256
-                    ))($grid);
-                    $nextGrid = (new CollapseJob($board->tiles, $board->width, $board->height))($grid);
+                    ))($board);
+                    $nextBoard = (new CollapseJob())($board);
 
-                    if ($nextGrid === null) {
-                        return [$grid, $images];
+                    if ($nextBoard === null) {
+                        return [$board, $images];
                     }
 
-                    return $collapseLoop([$nextGrid, $images]);
+                    return $collapseLoop([$nextBoard, $images]);
                 };
             });
             yield function ($data) {
-                [$grid, $images] = $data;
+                [$board, $images] = $data;
 
                 return (new Mp4Job($this->cacheDir))($images);
             };
@@ -105,7 +107,7 @@ class WaveFunctionCollapseCommand extends Command
             };
         });
 
-        $flow(new Ip([$board->grid, []]));
+        $flow(new Ip([$width, $height, $dataSet]));
 
         $flow->await();
 

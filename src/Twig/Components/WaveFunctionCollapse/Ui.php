@@ -44,17 +44,17 @@ final class Ui
     public function collapse(): void
     {
         $flow = Flow::do(function () {
-            yield new CollapseJob($this->board->tiles, $this->board->width, $this->board->height);
-            yield function ($nextGrid) {
-                if ($nextGrid === null) {
+            yield new CollapseJob();
+            yield function ($nextBoard) {
+                if ($nextBoard === null) {
                     $this->board->startOver();
                 } else {
-                    $this->board->grid = $nextGrid;
+                    $this->board = $nextBoard;
                 }
             };
         });
 
-        $flow(new Ip($this->board->grid));
+        $flow(new Ip($this->board));
         $flow->await();
     }
 

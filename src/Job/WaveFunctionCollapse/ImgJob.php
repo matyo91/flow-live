@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Job\WaveFunctionCollapse;
 
 use App\EnumType\WaveFunctionCollapse\DataSetEnumType;
-use App\Model\WaveFunctionCollapse\Cell;
+use App\Model\WaveFunctionCollapse\Board;
 use App\Model\WaveFunctionCollapse\Tile;
 use Flow\JobInterface;
 use Imagine\Image\Box;
@@ -16,31 +16,27 @@ use Imagine\Image\Point;
 use function sprintf;
 
 /**
- * @implements JobInterface<Cell[], ImageInterface>
+ * @implements JobInterface<Board, ImageInterface>
  */
 class ImgJob implements JobInterface
 {
     public function __construct(
         private ImagineInterface $imagine,
         private string $assetsDir,
-        /** @var Tile[] */
-        public array $tiles,
-        public int $width,
-        public int $height,
         public DataSetEnumType $dataSet,
         public int $tileSize = 32,
     ) {}
 
-    public function __invoke($grid): ImageInterface
+    public function __invoke($board): ImageInterface
     {
-        $image = $this->imagine->create(new Box($this->width * $this->tileSize, $this->height * $this->tileSize));
+        $image = $this->imagine->create(new Box($board->width * $this->tileSize, $board->height * $this->tileSize));
 
-        for ($j = 0; $j < $this->height; $j++) {
-            for ($i = 0; $i < $this->width; $i++) {
-                $index = $i + $j * $this->height;
-                $cell = $grid[$index];
+        for ($j = 0; $j < $board->height; $j++) {
+            for ($i = 0; $i < $board->width; $i++) {
+                $index = $i + $j * $board->height;
+                $cell = $board->grid[$index];
                 if ($cell->isCollapsed()) {
-                    $tile = $this->tiles[$cell->options[0]];
+                    $tile = $board->tiles[$cell->options[0]];
                     $tileImagePath = sprintf(
                         '%s/images/wave-function-collapse/%s/%d.png',
                         $this->assetsDir,

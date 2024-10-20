@@ -4,30 +4,23 @@ declare(strict_types=1);
 
 namespace App\Job\WaveFunctionCollapse;
 
+use App\Model\WaveFunctionCollapse\Board;
 use App\Model\WaveFunctionCollapse\Cell;
-use App\Model\WaveFunctionCollapse\Tile;
 use Flow\JobInterface;
 
 use function count;
 use function in_array;
 
 /**
- * @implements JobInterface<Cell[], Cell[]|null>
+ * @implements JobInterface<Board, Board|null>
  */
 class CollapseJob implements JobInterface
 {
-    public function __construct(
-        /** @var Tile[] */
-        public array $tiles,
-        public int $width,
-        public int $height,
-    ) {}
-
-    public function __invoke($grid): mixed
+    public function __invoke($board): mixed
     {
         // Pick cell with least entropy
-        $gridNoOptions = array_filter($grid, static fn (Cell $a) => empty($a->getOptions()));
-        $gridCopy = array_filter($grid, static fn (Cell $a) => !$a->isCollapsed());
+        $gridNoOptions = array_filter($board->grid, static fn (Cell $a) => empty($a->getOptions()));
+        $gridCopy = array_filter($board->grid, static fn (Cell $a) => !$a->isCollapsed());
         if (!empty($gridNoOptions) || empty($gridCopy)) {
             return null;
         }
@@ -58,50 +51,50 @@ class CollapseJob implements JobInterface
         $cell->setOptions([$pick]);
 
         $nextGrid = [];
-        for ($j = 0; $j < $this->height; $j++) {
-            for ($i = 0; $i < $this->width; $i++) {
-                $index = $i + $j * $this->height;
-                if ($grid[$index]->isCollapsed()) {
-                    $nextGrid[$index] = $grid[$index];
+        for ($j = 0; $j < $board->height; $j++) {
+            for ($i = 0; $i < $board->width; $i++) {
+                $index = $i + $j * $board->height;
+                if ($board->grid[$index]->isCollapsed()) {
+                    $nextGrid[$index] = $board->grid[$index];
                 } else {
-                    $options = range(0, count($this->tiles) - 1);
+                    $options = range(0, count($board->tiles) - 1);
 
                     // Look up
                     if ($j > 0) {
-                        $up = $grid[$i + ($j - 1) * $this->height];
+                        $up = $board->grid[$i + ($j - 1) * $board->height];
                         $validOptions = [];
                         foreach ($up->getOptions() as $option) {
-                            $valid = $this->tiles[$option]->down;
+                            $valid = $board->tiles[$option]->down;
                             $validOptions = array_merge($validOptions, $valid);
                         }
                         $this->checkValid($options, $validOptions);
                     }
                     // Look right
-                    if ($i < $this->width - 1) {
-                        $right = $grid[$i + 1 + $j * $this->height];
+                    if ($i < $board->width - 1) {
+                        $right = $board->grid[$i + 1 + $j * $board->height];
                         $validOptions = [];
                         foreach ($right->getOptions() as $option) {
-                            $valid = $this->tiles[$option]->left;
+                            $valid = $board->tiles[$option]->left;
                             $validOptions = array_merge($validOptions, $valid);
                         }
                         $this->checkValid($options, $validOptions);
                     }
                     // Look down
-                    if ($j < $this->height - 1) {
-                        $down = $grid[$i + ($j + 1) * $this->height];
+                    if ($j < $board->height - 1) {
+                        $down = $board->grid[$i + ($j + 1) * $board->height];
                         $validOptions = [];
                         foreach ($down->getOptions() as $option) {
-                            $valid = $this->tiles[$option]->up;
+                            $valid = $board->tiles[$option]->up;
                             $validOptions = array_merge($validOptions, $valid);
                         }
                         $this->checkValid($options, $validOptions);
                     }
                     // Look left
                     if ($i > 0) {
-                        $left = $grid[$i - 1 + $j * $this->height];
+                        $left = $board->grid[$i - 1 + $j * $board->height];
                         $validOptions = [];
                         foreach ($left->getOptions() as $option) {
-                            $valid = $this->tiles[$option]->right;
+                            $valid = $board->tiles[$option]->right;
                             $validOptions = array_merge($validOptions, $valid);
                         }
                         $this->checkValid($options, $validOptions);
@@ -111,8 +104,9 @@ class CollapseJob implements JobInterface
                 }
             }
         }
+        $board->grid = $nextGrid;
 
-        return $nextGrid;
+        return $board;
     }
 
     /**
