@@ -2,57 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Twig\Components\WaveFunctionCollapse;
+namespace App\Model\WaveFunctionCollapse;
 
 use App\EnumType\WaveFunctionCollapse\DataSetEnumType;
-use App\Job\WaveFunctionCollapse\CollapseJob;
-use App\Model\WaveFunctionCollapse\Cell;
-use App\Model\WaveFunctionCollapse\Tile;
-use Flow\Flow\Flow;
-use Flow\Ip;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 use function count;
 
-#[AsLiveComponent]
 final class Board
 {
-    use DefaultActionTrait;
-
-    #[LiveProp(writable: true, onUpdated: 'reset')]
-    public DataSetEnumType $dataSet = DataSetEnumType::CIRCUIT_CODING_TRAIN;
-
-    /** @var array<Tile> */
-    #[LiveProp(hydrateWith: 'hydrateTiles', dehydrateWith: 'dehydrateTiles', writable: true)]
+    /** @var Tile[] */
     public array $tiles = [];
-    /** @var array<Cell> */
-    #[LiveProp(hydrateWith: 'hydrateGrid', dehydrateWith: 'dehydrateGrid', writable: true)]
+    /** @var Cell[] */
     public array $grid = [];
 
-    #[LiveProp]
     public int $width = 0;
-    #[LiveProp]
     public int $height = 0;
 
-    #[LiveProp]
-    public bool $pool = true;
-
-    public function mount(int $width, int $height): void
+    public function __construct(int $width = 1, int $height = 1)
     {
         $this->width = $width;
         $this->height = $height;
-
-        $this->reset();
     }
 
-    public function reset(): void
+    public function reset(DataSetEnumType $dataSet): void
     {
-        $this->loadDataset();
-
-        $initialTiles = $this->tiles;
+        $initialTiles = $this->loadDataset($dataSet);
         $initialTileCount = count($initialTiles);
         $this->tiles = [];
         for ($i = 0; $i < $initialTileCount; $i++) {
@@ -72,101 +46,12 @@ final class Board
         $this->startOver();
     }
 
-    #[LiveAction]
-    public function collapse(): void
+    public function startOver(): void
     {
-        $flow = Flow::do(function () {
-            yield new CollapseJob($this->tiles, $this->width, $this->height);
-            yield function ($nextGrid) {
-                if ($nextGrid === null) {
-                    $this->startOver();
-                } else {
-                    $this->grid = $nextGrid;
-                }
-
-                return $this->grid;
-            };
-        });
-
-        $flow(new Ip($this->grid));
-        $flow->await();
-    }
-
-    #[LiveAction]
-    public function togglePool(): void
-    {
-        $this->pool = !$this->pool;
-    }
-
-    /**
-     * @param array<Tile> $tiles
-     *
-     * @return array<mixed>
-     */
-    public function dehydrateTiles(array $tiles): array
-    {
-        return array_map(static function (Tile $tile) {
-            return [
-                'index' => $tile->index,
-                'edges' => $tile->edges,
-                'direction' => $tile->direction,
-                'up' => $tile->up,
-                'right' => $tile->right,
-                'down' => $tile->down,
-                'left' => $tile->left,
-            ];
-        }, $tiles);
-    }
-
-    /**
-     * @param array<mixed> $data
-     *
-     * @return array<Tile>
-     */
-    public function hydrateTiles($data): array
-    {
-        return array_map(static function ($tileData) {
-            return new Tile(
-                $tileData['index'],
-                $tileData['edges'],
-                $tileData['direction'],
-                $tileData['up'],
-                $tileData['right'],
-                $tileData['down'],
-                $tileData['left']
-            );
-        }, $data);
-    }
-
-    /**
-     * @param array<Cell> $grid
-     *
-     * @return array<mixed>
-     */
-    public function dehydrateGrid(array $grid): array
-    {
-        return array_map(static function (Cell $cell) {
-            return [
-                'options' => $cell->options,
-                'collapsed' => $cell->collapsed,
-            ];
-        }, $grid);
-    }
-
-    /**
-     * @param array<mixed> $data
-     *
-     * @return array<Cell>
-     */
-    public function hydrateGrid(array $data): array
-    {
-        return array_map(function ($cellData) {
-            $cell = new Cell(count($this->tiles));
-            $cell->options = $cellData['options'];
-            $cell->collapsed = $cellData['collapsed'];
-
-            return $cell;
-        }, $data);
+        // Create cell for each spot on the grid
+        for ($i = 0; $i < $this->width * $this->height; $i++) {
+            $this->grid[$i] = new Cell(count($this->tiles));
+        }
     }
 
     /**
@@ -185,17 +70,12 @@ final class Board
         return array_values($uniqueTilesMap);
     }
 
-    private function startOver(): void
+    /**
+     * @return Tile[]
+     */
+    private static function loadDataset(DataSetEnumType $dataSet): array
     {
-        // Create cell for each spot on the grid
-        for ($i = 0; $i < $this->width * $this->height; $i++) {
-            $this->grid[$i] = new Cell(count($this->tiles));
-        }
-    }
-
-    private function loadDataset(): void
-    {
-        $this->tiles = match ($this->dataSet) {
+        return match ($dataSet) {
             DataSetEnumType::CIRCUIT, DataSetEnumType::CIRCUIT_CODING_TRAIN => [
                 new Tile(0, ['AAA', 'AAA', 'AAA', 'AAA']),
                 new Tile(1, ['BBB', 'BBB', 'BBB', 'BBB']),

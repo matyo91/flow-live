@@ -18,7 +18,7 @@ class Cell
     /**
      * @param array<int>|int $value
      */
-    public function __construct(array|int $value)
+    public function __construct(array|int $value = [])
     {
         if (is_array($value)) {
             $this->options = $value;

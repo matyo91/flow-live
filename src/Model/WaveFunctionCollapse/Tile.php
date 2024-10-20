@@ -9,9 +9,9 @@ use function count;
 class Tile
 {
     public function __construct(
-        public int $index,
+        public int $index = 0,
         /** @var array<string> */
-        public array $edges,
+        public array $edges = [],
         public int $direction = 0,
         /** @var array<int> */
         public array $up = [],
