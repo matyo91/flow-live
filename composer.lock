@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f4892a70da88bcd37459d01968bbdb3",
+    "content-hash": "18fba5c6db382a85a4d8b52c100ce2e4",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1410,16 +1410,16 @@
         },
         {
             "name": "doctrine/sql-formatter",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/sql-formatter.git",
-                "reference": "16ca9e39877369d664f06dacde468548298bdc40"
+                "reference": "b784cbde727cf806721451dde40eff4fec3bbe86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/16ca9e39877369d664f06dacde468548298bdc40",
-                "reference": "16ca9e39877369d664f06dacde468548298bdc40",
+                "url": "https://api.github.com/repos/doctrine/sql-formatter/zipball/b784cbde727cf806721451dde40eff4fec3bbe86",
+                "reference": "b784cbde727cf806721451dde40eff4fec3bbe86",
                 "shasum": ""
             },
             "require": {
@@ -1460,9 +1460,74 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/sql-formatter/issues",
-                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.0"
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.5.1"
             },
-            "time": "2024-09-11T07:29:40+00:00"
+            "time": "2024-10-21T18:21:57+00:00"
+        },
+        {
+            "name": "dragonmantank/cron-expression",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dragonmantank/cron-expression.git",
+                "reference": "8c784d071debd117328803d86b2097615b457500"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/8c784d071debd117328803d86b2097615b457500",
+                "reference": "8c784d071debd117328803d86b2097615b457500",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0",
+                "webmozart/assert": "^1.0"
+            },
+            "replace": {
+                "mtdowling/cron-expression": "^1.0"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cron\\": "src/Cron/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Tankersley",
+                    "email": "chris@ctankersley.com",
+                    "homepage": "https://github.com/dragonmantank"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
+            ],
+            "support": {
+                "issues": "https://github.com/dragonmantank/cron-expression/issues",
+                "source": "https://github.com/dragonmantank/cron-expression/tree/v3.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dragonmantank",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-10-09T13:47:03+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -6921,6 +6986,86 @@
             "time": "2024-05-31T14:55:39+00:00"
         },
         {
+            "name": "symfony/scheduler",
+            "version": "v7.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/scheduler.git",
+                "reference": "024c63fb700453cb53c2d9f71e6868288b0b6fe9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/scheduler/zipball/024c63fb700453cb53c2d9f71e6868288b0b6fe9",
+                "reference": "024c63fb700453cb53c2d9f71e6868288b0b6fe9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/clock": "^6.4|^7.0"
+            },
+            "require-dev": {
+                "dragonmantank/cron-expression": "^3.1",
+                "symfony/cache": "^6.4|^7.0",
+                "symfony/console": "^6.4|^7.0",
+                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/event-dispatcher": "^6.4|^7.0",
+                "symfony/lock": "^6.4|^7.0",
+                "symfony/messenger": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Scheduler\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Rabochiy",
+                    "email": "upyx.00@gmail.com"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides scheduling through Symfony Messenger",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "cron",
+                "schedule",
+                "scheduler"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/scheduler/tree/v7.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-06-02T15:49:12+00:00"
+        },
+        {
             "name": "symfony/security-bundle",
             "version": "v7.1.4",
             "source": {
@@ -7452,16 +7597,16 @@
         },
         {
             "name": "symfony/stimulus-bundle",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stimulus-bundle.git",
-                "reference": "ae69e3a764694b9f45d8a009dd2b8c22444c5e0c"
+                "reference": "e5f7747b514865719e0990389ce35a9b71bebb48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/ae69e3a764694b9f45d8a009dd2b8c22444c5e0c",
-                "reference": "ae69e3a764694b9f45d8a009dd2b8c22444c5e0c",
+                "url": "https://api.github.com/repos/symfony/stimulus-bundle/zipball/e5f7747b514865719e0990389ce35a9b71bebb48",
+                "reference": "e5f7747b514865719e0990389ce35a9b71bebb48",
                 "shasum": ""
             },
             "require": {
@@ -7501,7 +7646,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.20.0"
+                "source": "https://github.com/symfony/stimulus-bundle/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -7517,7 +7662,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-24T09:27:42+00:00"
+            "time": "2024-10-05T22:11:16+00:00"
         },
         {
             "name": "symfony/stopwatch",
@@ -8034,6 +8179,79 @@
             "time": "2024-09-08T12:32:26+00:00"
         },
         {
+            "name": "symfony/twitter-notifier",
+            "version": "v7.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/twitter-notifier.git",
+                "reference": "b31e6bef668fa44b59a7fd02ada4f1e9b3f1bf9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/twitter-notifier/zipball/b31e6bef668fa44b59a7fd02ada4f1e9b3f1bf9e",
+                "reference": "b31e6bef668fa44b59a7fd02ada4f1e9b3f1bf9e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/http-client": "^6.4|^7.0",
+                "symfony/notifier": "^6.4|^7.0"
+            },
+            "conflict": {
+                "symfony/mime": "<6.4"
+            },
+            "require-dev": {
+                "symfony/mime": "^6.4|^7.0"
+            },
+            "type": "symfony-notifier-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Notifier\\Bridge\\Twitter\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Twitter Notifier Bridge",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "notifier",
+                "twitter"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/twitter-notifier/tree/v7.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-05-31T14:57:53+00:00"
+        },
+        {
             "name": "symfony/type-info",
             "version": "v7.1.5",
             "source": {
@@ -8117,16 +8335,16 @@
         },
         {
             "name": "symfony/ux-icons",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-icons.git",
-                "reference": "07328c6d3cf480f7d5dafdf621f0d54323e23035"
+                "reference": "c3b3fd29b3f90e977b267251ef15ea06f3cec553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/07328c6d3cf480f7d5dafdf621f0d54323e23035",
-                "reference": "07328c6d3cf480f7d5dafdf621f0d54323e23035",
+                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/c3b3fd29b3f90e977b267251ef15ea06f3cec553",
+                "reference": "c3b3fd29b3f90e977b267251ef15ea06f3cec553",
                 "shasum": ""
             },
             "require": {
@@ -8135,7 +8353,8 @@
                 "symfony/twig-bundle": "^6.4|^7.0"
             },
             "conflict": {
-                "symfony/flex": "<1.13"
+                "symfony/flex": "<1.13",
+                "symfony/ux-twig-component": "<2.21"
             },
             "require-dev": {
                 "psr/log": "^2|^3",
@@ -8185,7 +8404,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-icons/tree/v2.20.0"
+                "source": "https://github.com/symfony/ux-icons/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -8201,20 +8420,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-18T14:55:01+00:00"
+            "time": "2024-10-21T19:01:22+00:00"
         },
         {
             "name": "symfony/ux-live-component",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "c05ac6bfa7368415676d74183eded05be2635a1d"
+                "reference": "1cc963a50a31a8ca92fbd145b29b27231b199b1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/c05ac6bfa7368415676d74183eded05be2635a1d",
-                "reference": "c05ac6bfa7368415676d74183eded05be2635a1d",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/1cc963a50a31a8ca92fbd145b29b27231b199b1b",
+                "reference": "1cc963a50a31a8ca92fbd145b29b27231b199b1b",
                 "shasum": ""
             },
             "require": {
@@ -8278,7 +8497,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-live-component/tree/v2.20.0"
+                "source": "https://github.com/symfony/ux-live-component/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -8294,20 +8513,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-24T09:27:42+00:00"
+            "time": "2024-10-15T10:36:54+00:00"
         },
         {
             "name": "symfony/ux-turbo",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-turbo.git",
-                "reference": "5eaa803dea9f954aa124963f2c872b414d97cc97"
+                "reference": "075c609e54fc421c6b1c1974e46e9a8b2d44277c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/5eaa803dea9f954aa124963f2c872b414d97cc97",
-                "reference": "5eaa803dea9f954aa124963f2c872b414d97cc97",
+                "url": "https://api.github.com/repos/symfony/ux-turbo/zipball/075c609e54fc421c6b1c1974e46e9a8b2d44277c",
+                "reference": "075c609e54fc421c6b1c1974e46e9a8b2d44277c",
                 "shasum": ""
             },
             "require": {
@@ -8322,21 +8541,22 @@
                 "doctrine/doctrine-bundle": "^2.4.3",
                 "doctrine/orm": "^2.8 | 3.0",
                 "phpstan/phpstan": "^1.10",
+                "symfony/asset-mapper": "^6.4|^7.0",
                 "symfony/debug-bundle": "^5.4|^6.0|^7.0",
                 "symfony/expression-language": "^5.4|^6.0|^7.0",
                 "symfony/form": "^5.4|^6.0|^7.0",
-                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
+                "symfony/framework-bundle": "^6.4|^7.0",
                 "symfony/mercure-bundle": "^0.3.7",
                 "symfony/messenger": "^5.4|^6.0|^7.0",
-                "symfony/panther": "^1.0|^2.0",
+                "symfony/panther": "^2.1",
                 "symfony/phpunit-bridge": "^5.4|^6.0|^7.0",
                 "symfony/process": "^5.4|6.3.*|^7.0",
                 "symfony/property-access": "^5.4|^6.0|^7.0",
                 "symfony/security-core": "^5.4|^6.0|^7.0",
                 "symfony/stopwatch": "^5.4|^6.0|^7.0",
-                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
-                "symfony/web-profiler-bundle": "^5.4|^6.0|^7.0",
-                "symfony/webpack-encore-bundle": "^2.1.1"
+                "symfony/twig-bundle": "^6.4|^7.0",
+                "symfony/ux-twig-component": "^2.21",
+                "symfony/web-profiler-bundle": "^5.4|^6.0|^7.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -8375,7 +8595,7 @@
                 "turbo-stream"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-turbo/tree/v2.20.0"
+                "source": "https://github.com/symfony/ux-turbo/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -8391,20 +8611,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-10T12:38:04+00:00"
+            "time": "2024-10-21T19:07:02+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "edcd13daa4566435fbfc8b9766dbcfebb679384f"
+                "reference": "5b60b239fffcb04fc8bdb2a5a4001d19442d575d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/edcd13daa4566435fbfc8b9766dbcfebb679384f",
-                "reference": "edcd13daa4566435fbfc8b9766dbcfebb679384f",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/5b60b239fffcb04fc8bdb2a5a4001d19442d575d",
+                "reference": "5b60b239fffcb04fc8bdb2a5a4001d19442d575d",
                 "shasum": ""
             },
             "require": {
@@ -8458,7 +8678,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/v2.20.0"
+                "source": "https://github.com/symfony/ux-twig-component/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -8474,7 +8694,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-24T09:36:36+00:00"
+            "time": "2024-10-05T22:11:16+00:00"
         },
         {
             "name": "symfony/validator",

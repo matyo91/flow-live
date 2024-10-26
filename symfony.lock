@@ -257,6 +257,12 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/twitter-notifier": {
+        "version": "7.1",
+        "recipe": {
+            "version": "6.3"
+        }
+    },
     "symfony/ux-icons": {
         "version": "v2.19.0"
     },

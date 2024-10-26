@@ -266,6 +266,15 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/twitter-notifier": {
+        "version": "7.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.3",
+            "ref": "7a3d7c6351ca1052cb550e1798f26cf57582a8ac"
+        }
+    },
     "symfony/ux-icons": {
         "version": "2.19",
         "recipe": {
