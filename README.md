@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/matyo91/flow-live">
-    <img src="public/logo.png" width="auto" height="128px" alt="Flow">
+    <img src="assets/images/logo.png" width="auto" height="128px" alt="Flow">
   </a>
 </p>
 
@@ -43,6 +43,16 @@ Flow as a container for PHP-ETL, for more details, please visit: [https://php-et
 
 ```
 bin/console app:php-etl
+```
+
+### Wave Function Collapse
+
+Inspired by
+- https://github.com/CodingTrain/Wave-Function-Collapse
+- https://github.com/FeatheredSnek/phpwfc
+
+```
+bin/console app:wave-function-collapse
 ```
 
 ## License

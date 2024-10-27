@@ -1,0 +1,9 @@
+<div{{ attributes }}>
+    <div class="vh-100 theme theme-{{ theme.value }}">
+        <twig:Header key="{{ theme.value }}" seo="{{ seo }}" theme="{{ theme }}" />
+        {% if seo.page == 'wave-function-collapse' %}
+        <twig:WaveFunctionCollapse:Ui width="5" height="5" />
+        {% endif %}
+        <twig:Footer />
+    </div>
+</div>

@@ -8,6 +8,10 @@ framework:
 
     #esi: true
     #fragments: true
+    notifier:
+        message_bus: false
+        chatter_transports:
+            twitter: '%env(TWITTER_DSN)%'
 
 when@test:
     framework:

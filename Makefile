@@ -5,6 +5,10 @@
 dev: ## Start dev server
 	composer dev
 
+build: ## Build
+	php bin/console sass:build
+	php bin/console asset-map:compile
+
 docs-serve: ## Start documentation server locally
 	composer docs-serve
 

@@ -266,8 +266,53 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/twitter-notifier": {
+        "version": "7.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.3",
+            "ref": "7a3d7c6351ca1052cb550e1798f26cf57582a8ac"
+        }
+    },
+    "symfony/ux-icons": {
+        "version": "2.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.17",
+            "ref": "803a3bbd5893f9584969ab8670290cdfb6a0a5b5"
+        },
+        "files": [
+            "assets/icons/symfony.svg"
+        ]
+    },
+    "symfony/ux-live-component": {
+        "version": "2.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "73e69baf18f47740d6f58688c5464b10cdacae06"
+        },
+        "files": [
+            "config/routes/ux_live_component.yaml"
+        ]
+    },
     "symfony/ux-turbo": {
         "version": "v2.19.0"
+    },
+    "symfony/ux-twig-component": {
+        "version": "2.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.13",
+            "ref": "67814b5f9794798b885cec9d3f48631424449a01"
+        },
+        "files": [
+            "config/packages/twig_component.yaml"
+        ]
     },
     "symfony/validator": {
         "version": "7.1",
@@ -293,6 +338,9 @@
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
         ]
+    },
+    "symfonycasts/sass-bundle": {
+        "version": "v0.7.0"
     },
     "twig/extra-bundle": {
         "version": "v3.11.0"
