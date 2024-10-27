@@ -9,8 +9,8 @@ use App\Job\WaveFunctionCollapse\CollapseJob;
 use App\Job\WaveFunctionCollapse\ImgJob;
 use App\Job\WaveFunctionCollapse\Mp4Job;
 use App\Model\WaveFunctionCollapse\Board;
-use Flow\Flow\Flow;
 use Flow\Flow\YFlow;
+use Flow\FlowFactory as FlowFlowFactory;
 use Flow\FlowInterface;
 use Imagine\Gd\Imagine;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -18,6 +18,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 class FlowFactory
 {
     public function __construct(
+        private FlowFlowFactory $flowFactory,
         #[Autowire('%kernel.project_dir%/assets')]
         private string $assetsDir,
         #[Autowire('%kernel.cache_dir%/wave_function_collapse')]
@@ -31,7 +32,7 @@ class FlowFactory
     {
         $imagine = new Imagine();
 
-        return Flow::do(function () use ($imagine, $dataSet) {
+        return $this->flowFactory->create(function () use ($imagine, $dataSet) {
             yield static function ($data) {
                 [$width, $height, $dataSet] = $data;
 

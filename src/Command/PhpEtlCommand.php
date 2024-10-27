@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use Flow\Flow\Flow;
+use Flow\FlowFactory;
 use Flow\Ip;
 use Generator;
 use Kiboko\Component\Bucket\AcceptanceResultBucket;
@@ -31,9 +31,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class PhpEtlCommand extends Command
 {
+    public function __construct(
+        private FlowFactory $flowFactory,
+        ?string $name = null,
+    ) {
+        parent::__construct($name);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $flow = Flow::do(static function () {
+        $flow = $this->flowFactory->create(static function () {
             yield static function ($data) {
                 $pipeline = new Pipeline(new PipelineRunner(new NullLogger()), new NullState());
                 $pipeline->extract(

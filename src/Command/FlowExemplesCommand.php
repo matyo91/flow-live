@@ -25,8 +25,8 @@ use Flow\Driver\FiberDriver;
 use Flow\Driver\ReactDriver;
 use Flow\Driver\SpatieDriver;
 use Flow\Driver\SwooleDriver;
-use Flow\Flow\Flow;
 use Flow\Flow\YFlow;
+use Flow\FlowFactory;
 use Flow\Ip;
 use Flow\IpStrategy\MaxIpStrategy;
 use Flow\Job\YJob;
@@ -42,6 +42,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class FlowExemplesCommand extends Command
 {
+    public function __construct(
+        private FlowFactory $flowFactory,
+        ?string $name = null,
+    ) {
+        parent::__construct($name);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -60,10 +67,10 @@ class FlowExemplesCommand extends Command
         printf("- DataC(f)\n");
 
         echo "begin - synchronous\n";
-        $asyncTask = static function () use ($driver) {
+        $asyncTask = function () use ($driver) {
             echo "begin - flow asynchronous\n";
 
-            $flow = Flow::do(static function () use ($driver) {
+            $flow = $this->flowFactory->create(static function () use ($driver) {
                 yield [new Job1($driver), new ErrorJob1(), new MaxIpStrategy(2)];
                 yield [new Job2($driver), new ErrorJob2(), new MaxIpStrategy(2)];
                 yield new Job3();

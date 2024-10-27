@@ -11,7 +11,7 @@ use Flow\Driver\FiberDriver;
 use Flow\Driver\ReactDriver;
 use Flow\Driver\SpatieDriver;
 use Flow\Driver\SwooleDriver;
-use Flow\Flow\Flow;
+use Flow\FlowFactory;
 use Flow\Ip;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -27,6 +27,13 @@ use function sprintf;
 )]
 class CarbonImageCommand extends Command
 {
+    public function __construct(
+        private FlowFactory $flowFactory,
+        ?string $name = null,
+    ) {
+        parent::__construct($name);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -39,7 +46,7 @@ class CarbonImageCommand extends Command
             // 5 => new SpatieDriver(),
         };
 
-        $flow = Flow::do(static function () use ($io) {
+        $flow = $this->flowFactory->create(static function () use ($io) {
             yield new CarbonImageJob(__DIR__ . '/../../data/carbon-image/carbon-config.json');
             yield static function (CarbonImage $carbonImage) use ($io) {
                 $io->info(sprintf('Finished %s %s', $carbonImage->code, $carbonImage->url));

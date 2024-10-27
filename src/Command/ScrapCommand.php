@@ -11,7 +11,7 @@ use App\Model\Scrap\UrlContent;
 use Fiber;
 use Flow\AsyncHandler\DeferAsyncHandler;
 use Flow\Driver\FiberDriver;
-use Flow\Flow\Flow;
+use Flow\FlowFactory;
 use Flow\Ip;
 use Flow\Job\YJob;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -38,6 +38,7 @@ class ScrapCommand extends Command
     private SluggerInterface $slugger;
 
     public function __construct(
+        private FlowFactory $flowFactory,
         HttpClientInterface $httpClient,
         ParameterBagInterface $parameterBag,
         SluggerInterface $slugger
@@ -84,7 +85,7 @@ class ScrapCommand extends Command
 
         $driver = new FiberDriver();
 
-        $flow = Flow::do(function () use ($io) {
+        $flow = $this->flowFactory->create(function () use ($io) {
             yield new ScrapUrlsJob();
             yield static function (array $urlDatas) use ($io) {
                 $io->writeln(sprintf('ScrapUrlsJob   : Finished scrapping %d urls', count($urlDatas)));

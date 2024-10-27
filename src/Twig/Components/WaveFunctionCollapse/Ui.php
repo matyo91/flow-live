@@ -7,7 +7,7 @@ namespace App\Twig\Components\WaveFunctionCollapse;
 use App\EnumType\WaveFunctionCollapse\DataSetEnumType;
 use App\Job\WaveFunctionCollapse\CollapseJob;
 use App\Model\WaveFunctionCollapse\Board;
-use Flow\Flow\Flow;
+use Flow\FlowFactory;
 use Flow\Ip;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -28,6 +28,10 @@ final class Ui
     #[LiveProp]
     public bool $pool = true;
 
+    public function __construct(
+        private FlowFactory $flowFactory,
+    ) {}
+
     public function mount(int $width, int $height): void
     {
         $this->board = new Board($width, $height);
@@ -43,7 +47,7 @@ final class Ui
     #[LiveAction]
     public function collapse(): void
     {
-        $flow = Flow::do(function () {
+        $flow = $this->flowFactory->create(function () {
             yield new CollapseJob();
             yield function ($nextBoard) {
                 if ($nextBoard === null) {
