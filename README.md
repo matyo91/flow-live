@@ -47,6 +47,8 @@ bin/console app:php-etl
 
 ### Wave Function Collapse
 
+For more details on Wave Function Collapse, please visit: [https://blog.darkwood.com/article/wave-function-collapse](https://blog.darkwood.com/article/wave-function-collapse)
+
 Inspired by
 - https://github.com/CodingTrain/Wave-Function-Collapse
 - https://github.com/FeatheredSnek/phpwfc
