@@ -13,6 +13,14 @@ framework:
         chatter_transports:
             twitter: '%env(TWITTER_DSN)%'
 
+    http_client:
+        scoped_clients:
+            github.client:
+                base_uri: 'https://api.github.com'
+                headers:
+                    Accept: 'application/vnd.github.v3+json'
+                    Authorization: 'token %env(GITHUB_API_TOKEN)%'
+
 when@test:
     framework:
         test: true
