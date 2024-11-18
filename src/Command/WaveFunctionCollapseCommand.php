@@ -36,12 +36,17 @@ class WaveFunctionCollapseCommand extends Command
             ->addOption('width', null, InputOption::VALUE_OPTIONAL, 'Width of the grid', 5)
             ->addOption('height', null, InputOption::VALUE_OPTIONAL, 'Height of the grid', 5)
             ->addOption('dataset', null, InputOption::VALUE_OPTIONAL, 'Dataset to use', DataSetEnumType::CIRCUIT_CODING_TRAIN->value)
+            ->addOption('memory', null, InputOption::VALUE_OPTIONAL, 'Set memory limit')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        if ($memory = $input->getOption('memory')) {
+            ini_set('memory_limit', $memory . 'M');
+        }
 
         $width = (int) $input->getOption('width');
         $height = (int) $input->getOption('height');
