@@ -13,8 +13,7 @@ use Symfony\Component\Notifier\ChatterInterface;
 use Symfony\Component\Notifier\Message\ChatMessage;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
-// #[AsCronTask('0 7 * * *', arguments: ['memory' => 256, 'width' => 5, 'height' => 5])]
-#[AsCronTask('* * * * *', arguments: ['memory' => 256, 'width' => 5, 'height' => 5])]
+#[AsCronTask('0 7 * * *', arguments: ['memory' => 512, 'width' => 5, 'height' => 5])]
 final class FlowTask
 {
     public function __construct(
