@@ -30,6 +30,8 @@ final class FlowTask
                     ->transport('twitter')
                 ;
                 $this->chatter->send($message);
+
+                unlink($path);
             })
         ;
 
