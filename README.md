@@ -57,6 +57,14 @@ Inspired by
 bin/console app:wave-function-collapse
 ```
 
+## Symfony Certification
+
+For details on certification, please visit [https://certification.symfony.com](https://certification.symfony.com)
+
+```
+php -d memory_limit=-1 bin/console app:symfony-certification symfony7
+```
+
 ## License
 
 Live Flow is released under the MIT License.
